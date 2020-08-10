@@ -1,0 +1,70 @@
+@import '@/styles/_variable';
+
+.util- {
+  &#{flex} {
+    display: flex;
+  }
+  &#{center} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &#{space-between} {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &#{align-center} {
+    text-align: center;
+  }
+  &#{align-left} {
+    text-align: left;
+  }
+  &#{align-right} {
+    text-align: right;
+  }
+  &#{cursor-pointer} {
+    cursor: pointer;
+  }
+  &#{float-left} {
+    float: left;
+  }
+  &#{float-right} {
+    float: right;
+  }
+  &#{clearfix} {
+    &::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+  }
+  &#{absolute} {
+    position: absolute;
+  }
+  &#{relative} {
+    position: absolute;
+  }
+  &#{fixed} {
+    position: fixed;
+  }
+  &#{cursor-pointer} {
+    cursor: pointer;
+  }
+  &#{cursor-pointer-underline} {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  &#{color-white} {
+    color: white;
+  }
+  &#{img-wrapper} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img{
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+}
