@@ -9,6 +9,14 @@ module.exports = {
   runtimeCompiler: false,
   productionSourceMap: false,
   css: {
-    sourceMap: false
+    sourceMap: false,
+    loaderOptions: {
+      sass: {
+        // 全局引入sass 新 sass-loader prependData 旧版 data
+        prependData: `
+          @import "@/styles/_variable.scss";
+        `
+      }
+    }
   }
 }

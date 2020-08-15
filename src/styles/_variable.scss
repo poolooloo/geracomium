@@ -2,3 +2,16 @@
 $h1: 22px;
 $h2: 16px;
 $h3: 14px;
+$select-bgcolor: #233565;
+$select-font-color: #CFEBFF;
+$default-orange: #D97703;
+$base-screen: 1920;
+$base-height: 1078;
+
+@function px2vw($px) {
+  @return $px / $base-screen * 100vw;
+}
+
+@function px2vh($px) {
+  @return $px / $base-height * 1vh;
+}
