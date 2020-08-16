@@ -10,15 +10,18 @@
         ></el-option>
       </el-select>
     </template>
+    <echart-wrapper></echart-wrapper>
   </index-section>
 </template>
 
 <script>
 import IndexSection from "@/components/section/index-section";
+import EchartWrapper from "@/echarts/echart-wrapper";
 
 export default {
   components: {
     IndexSection,
+    EchartWrapper,
   },
   data() {
     return {
@@ -51,4 +54,10 @@ export default {
 </script>
 
 <style lang="scss">
+.component-age-of-people {
+  .component-age-echarts__wrapper {
+    min-height: 170px;
+    height: px2vh(170);
+  }
+}
 </style>

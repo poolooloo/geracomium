@@ -8,7 +8,7 @@
   width: px2vw(508);
   min-width: 508px;
   height: 100%;
-  padding: 80px 24px 24px;
+  padding: px2vh(80) px2vw(24) px2vh(24);
   overflow: auto;
 }
 </style>

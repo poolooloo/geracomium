@@ -8,6 +8,10 @@
       </layout-left>
 
       <layout-center>
+        <div class="page-index-title">
+          <p>青龙满族自治县养老服务大数据</p>
+        </div>
+        <map-section />
         <div class="page-index-center__section">
           <important-of-people />
           <policy />
@@ -33,6 +37,7 @@ import GenderOfPeople from "@/components/index/section-gender-of-people";
 import AgeOfPeople from "@/components/index/section-age-of-people";
 import AreaOfPeople from "@/components/index/section-area-of-people";
 
+import MapSection from '@/components/map/map-section.vue'
 import ImportantOfPeople from "@/components/index/section-important-of-people";
 import Policy from "@/components/index/section-policy";
 
@@ -55,16 +60,47 @@ export default {
     CheckIn,
     GenderOfPeople,
     DiseaseOfPeople,
-    LevelCare
+    LevelCare,
+    MapSection
   },
 };
 </script>
 
 <style lang="scss">
-.page-index{
-  .page-index-center__section{
+.page-index {
+  .page-index-center__section {
     display: flex;
     justify-content: space-between;
+  }
+  .page-index-title {
+    position: relative;
+    top: -2px;
+    margin: 0 auto 15px;
+    width: 483.7px;
+    height: 70.5px;
+    text-indent: -100vw;
+    background-color: $base-bgcolor;
+    background-image: url("../assets/images/title-bg.png");
+    background-size: cover;
+    p{
+      position: relative;
+      &::after,
+      &::before{
+        content: '';
+        position: absolute;
+        top: -1px;
+        left: -60px;
+        width: 60px;
+        height: 5px;
+        border-radius: 3px;
+        background-color: $base-bgcolor;
+      }
+      &::after{
+        content: '';
+        left: inherit;
+        right: -60px;
+      }
+    }
   }
 }
 </style>

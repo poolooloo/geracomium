@@ -1,17 +1,17 @@
 <template>
   <index-section class="component-level-care" title="分级照护">
-    <template #section-select>
-      <select name id></select>
-    </template>
+    <echart-wrapper></echart-wrapper>
   </index-section>
 </template>
 
 <script>
 import IndexSection from "@/components/section/index-section";
+import EchartWrapper from "@/echarts/echart-wrapper";
 
 export default {
   components: {
     IndexSection,
+    EchartWrapper
   },
 };
 </script>

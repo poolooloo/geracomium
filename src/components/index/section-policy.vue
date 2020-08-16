@@ -1,8 +1,5 @@
 <template>
   <index-section class="component-policy" title="当地养老政策列表">
-    <template #section-select>
-      <select name id></select>
-    </template>
   </index-section>
 </template>
 
@@ -15,3 +12,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.component-policy {
+  flex: 1;
+}
+</style>

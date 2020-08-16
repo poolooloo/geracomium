@@ -1,8 +1,5 @@
 <template>
   <index-section class="component-important-of-people" title="全县五保老人统计">
-    <template #section-select>
-      <select name id></select>
-    </template>
   </index-section>
 </template>
 
@@ -15,3 +12,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.component-important-of-people{
+  flex: 1;
+}
+</style>

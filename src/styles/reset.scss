@@ -50,3 +50,50 @@ p {
   background-color: rgba(100, 100, 100, 0.1);
   box-shadow: inset 0 0 5px rgba(100, 100, 100, 0.1);
 }
+
+.global-body {
+  .el-select-dropdown,
+  .el-input__inner {
+    width: 124px;
+    font-size: 12px;
+    color: $select-font-color;
+    background-color: $select-bgcolor;
+    border-radius: 0;
+    border-color: $select-bgcolor;
+  }
+  .el-input__inner {
+    width: 124px;
+    height: 24px;
+    padding-left: 8px;
+    font-size: 12px;
+    color: $select-font-color;
+    background-color: $select-bgcolor;
+    border-radius: 0;
+    border-color: $select-bgcolor;
+    &:hover,
+    &:focus {
+      border-color: $select-bgcolor;
+    }
+  }
+  .el-input__icon {
+    line-height: 24px;
+  }
+  .el-select-dropdown__item {
+    padding-left: 8px;
+    height: 24px;
+    font-size: 12px;
+    line-height: 24px;
+    color: $select-font-color;
+    &.hover {
+      color: $select-bgcolor;
+      background-color: $select-font-color;
+    }
+  }
+  .el-select .el-input.is-focus .el-input__inner{
+    border-color: $select-bgcolor;
+  }
+  .el-popper[x-placement^=bottom] .popper__arrow ,
+  .el-popper[x-placement^=bottom] .popper__arrow::after{
+    border-bottom-color: $select-bgcolor;
+  }
+}
