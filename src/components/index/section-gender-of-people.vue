@@ -6,6 +6,9 @@
         class="component-gender-of-people-chart"
         canvas-name="gender-of-people"
         :canvas-options="option"
+        width="120"
+        height="120"
+        ref="echart"
       />
     </echart-wrapper>
   </index-section>
@@ -13,24 +16,17 @@
 
 <script>
 import IndexSection from "@/components/section/index-section";
-import EchartWrapper from "@/components/echarts/echart-wrapper";
-import EchartView from "@/components/echarts/echart-view";
 
 const option = {
-  tooltip: {
-    trigger: "item",
-    formatter: "{a} <br/>{b}: {c} ({d}%)",
-  },
   legend: {
     orient: "vertical",
     left: 10,
-    data: ["直接访问", "邮件营销", "联盟广告", "视频广告", "搜索引擎"],
+    data: ["直接访问", "邮件营销", "联盟广告", "视频广告", "搜索引擎"], // api
   },
   series: [
     {
-      name: "访问来源",
       type: "pie",
-      radius: ["50%", "70%"],
+      radius: ["60%", "80%"],
       avoidLabelOverlap: false,
       label: {
         show: false,
@@ -39,7 +35,7 @@ const option = {
       emphasis: {
         label: {
           show: true,
-          fontSize: "30",
+          fontSize: "12",
           fontWeight: "bold",
         },
       },
@@ -60,14 +56,63 @@ const option = {
 export default {
   components: {
     IndexSection,
-    EchartWrapper,
-    EchartView,
   },
   data() {
     return {
       finish: false,
-      option
+      option,
+      myChart: null,
+      activeIndex: 0,
     };
+  },
+  mounted() {
+    this.init();
+  },
+  methods: {
+    init() {
+      const myChart = (this.myChart = this.$refs.echart.chart);
+      let index = this.activeIndex;
+
+      myChart.dispatchAction({
+        type: "highlight",
+        seriesIndex: 0,
+        dataIndex: 0,
+      });
+
+      myChart.on("mouseover", function (e) {
+        myChart.dispatchAction({
+          type: "downplay",
+          seriesIndex: 0,
+          dataIndex: 0,
+        });
+
+        if (e.dataIndex != index) {
+          myChart.dispatchAction({
+            type: "downplay",
+            seriesIndex: 0,
+            dataIndex: index,
+          });
+        }
+
+        if (e.dataIndex == 0) {
+          myChart.dispatchAction({
+            type: "highlight",
+            seriesIndex: 0,
+            dataIndex: e.dataIndex,
+          });
+        }
+      });
+
+      //当鼠标离开时，把当前项置为选中
+      myChart.on("mouseout", (e) => {
+        index = e.dataIndex;
+        myChart.dispatchAction({
+          type: "highlight",
+          seriesIndex: 0,
+          dataIndex: e.dataIndex,
+        });
+      });
+    },
   },
 };
 </script>

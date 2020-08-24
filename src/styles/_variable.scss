@@ -9,6 +9,12 @@ $default-orange: #D97703;
 $base-screen: 1920;
 $base-height: 1078;
 
+$blue-level1: #3152CD;
+$blue-level2: #2988E4;
+$blue-level3: #53C6E7;
+$blue-level4: #7AB1E4;
+$orange: $default-orange;
+
 @function px2vw($px) {
   @return $px / $base-screen * 100vw;
 }

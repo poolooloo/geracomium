@@ -8,6 +8,7 @@
 </template>
 <script>
 import SectionHeader from "@/components/section/index-section-header";
+
 export default {
   props: {
     title: String,

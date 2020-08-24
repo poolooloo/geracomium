@@ -3,8 +3,8 @@ export const grid = {
   left: '0',
   right: '0',
   bottom: '0',
-  top: '5px',
-  height: '95%',
+  top: '0',
+  height: '100%',
   width: '100%',
   containLabel: true
 }

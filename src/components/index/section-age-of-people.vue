@@ -10,6 +10,7 @@
         ></el-option>
       </el-select>
     </template>
+    <!-- ECHARTS -->
     <echart-wrapper>
       <echart-view
         v-if="finish || true"
@@ -24,9 +25,7 @@
 
 <script>
 import IndexSection from "@/components/section/index-section";
-import EchartWrapper from "@/components/echarts/echart-wrapper";
-import EchartView from "@/components/echarts/echart-view";
-import { getScreenBaseInfo } from "@/api";
+
 const option = {
   tooltip: {
     trigger: "item",
@@ -90,13 +89,6 @@ const option = {
 export default {
   components: {
     IndexSection,
-    EchartWrapper,
-    EchartView,
-  },
-  mounted() {
-    getScreenBaseInfo().then((res) => {
-      console.log(res);
-    });
   },
   data() {
     return {

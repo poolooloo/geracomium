@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import themeJSON from '@/echarts/theme.json'
 
 const echarts = require('echarts/lib/echarts')
 
@@ -10,5 +11,7 @@ require('echarts/lib/component/title')
 // 引入柱状图
 require('echarts/lib/chart/bar');
 require('echarts/lib/chart/funnel');
+
+echarts.registerTheme('custom', themeJSON)
 
 Vue.prototype.$echarts = echarts

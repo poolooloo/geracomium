@@ -28,6 +28,8 @@
   </div>
 </template>
 <script>
+import { getScreenBaseInfo } from "@/api";
+
 import LayoutLeft from "@/components/layout/layout-left";
 import LayoutRight from "@/components/layout/layout-right";
 import LayoutCenter from "@/components/layout/layout-center";
@@ -37,7 +39,7 @@ import GenderOfPeople from "@/components/index/section-gender-of-people";
 import AgeOfPeople from "@/components/index/section-age-of-people";
 import AreaOfPeople from "@/components/index/section-area-of-people";
 
-import MapSection from '@/components/map/map-section.vue'
+import MapSection from "@/components/map/map-section.vue";
 import ImportantOfPeople from "@/components/index/section-important-of-people";
 import Policy from "@/components/index/section-policy";
 
@@ -61,7 +63,17 @@ export default {
     GenderOfPeople,
     DiseaseOfPeople,
     LevelCare,
-    MapSection
+    MapSection,
+  },
+  mounted() {
+    this.init();
+  },
+  methods: {
+    init() {
+      getScreenBaseInfo().then((res) => {
+        console.log(res);
+      });
+    },
   },
 };
 </script>
@@ -82,11 +94,11 @@ export default {
     background-color: $base-bgcolor;
     background-image: url("../assets/images/title-bg.png");
     background-size: cover;
-    p{
+    p {
       position: relative;
       &::after,
-      &::before{
-        content: '';
+      &::before {
+        content: "";
         position: absolute;
         top: -1px;
         left: -60px;
@@ -95,8 +107,8 @@ export default {
         border-radius: 3px;
         background-color: $base-bgcolor;
       }
-      &::after{
-        content: '';
+      &::after {
+        content: "";
         left: inherit;
         right: -60px;
       }

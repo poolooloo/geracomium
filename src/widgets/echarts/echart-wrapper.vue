@@ -1,8 +1,13 @@
 <template>
-  <div class="component-echarts-wrapper">
+  <div class="component-echart-wrapper">
     <slot />
   </div>
 </template>
+<script>
+export default {
+  name: 'echart-wrapper',
+}
+</script>
 <style lang="scss">
 .component-echarts-wrapper{
   min-height: 170px;
