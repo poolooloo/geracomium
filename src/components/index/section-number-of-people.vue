@@ -6,7 +6,7 @@
 
 <script>
 import IndexSection from "@/components/section/index-section";
-import EchartWrapper from "@/echarts/echart-wrapper";
+import EchartWrapper from "@/components/echarts/echart-wrapper";
 
 export default {
   components: {

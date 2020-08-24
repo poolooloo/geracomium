@@ -20,6 +20,7 @@
     "babel-eslint": "^10.1.0",
     "babel-plugin-component": "^1.1.1",
     "echarts": "^4.7.0",
+    "echarts-liquidfill": "^2.0.6",
     "element-ui": "^2.13.1",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",

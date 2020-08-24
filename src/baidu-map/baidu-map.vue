@@ -55,7 +55,6 @@ export default {
 
       map.clearOverlays && map.clearOverlays();
       map.centerAndZoom(new BaiduMap.Point(x, y), zoom);
-      console.log("Render Baidu Map");
       map.setMapStyle({ style: 'dark'});
       // map.setMapStyle({ styleJson: customMapConfig });
     },
