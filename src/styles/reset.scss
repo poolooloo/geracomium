@@ -89,11 +89,21 @@ p {
       background-color: $select-font-color;
     }
   }
-  .el-select .el-input.is-focus .el-input__inner{
+  .el-select .el-input.is-focus .el-input__inner {
     border-color: $select-bgcolor;
   }
-  .el-popper[x-placement^=bottom] .popper__arrow ,
-  .el-popper[x-placement^=bottom] .popper__arrow::after{
+  .el-popper[x-placement^="bottom"] .popper__arrow,
+  .el-popper[x-placement^="bottom"] .popper__arrow::after {
     border-bottom-color: $select-bgcolor;
+  }
+  .el-dialog {
+    background-color: rgba(1, 21, 52, 0.9);
+  }
+  .el-dialog__title{
+    font-size: 12px;
+    color: #fff;
+  }
+  .el-dialog__header {
+    text-align: center;
   }
 }

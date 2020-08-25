@@ -2,24 +2,30 @@
   <index-section class="component-important-of-people" title="全县五保老人统计">
     <echart-wrapper class="flex-box">
       <div class="echarts flex-box">
-        <echart-view
-          v-if="finish"
-          class="component-important-of-people-chart"
-          canvas-name="important-of-people-right"
-          :canvas-options="option1"
-          width="150"
-          height="150"
-          ref="echart"
-        />
-        <echart-view
-          v-if="finish"
-          class="component-important-of-people-chart"
-          canvas-name="important-of-people-right"
-          :canvas-options="option2"
-          width="150"
-          height="150"
-          ref="echart"
-        />
+        <div class="margin-right-30">
+          <echart-view
+            v-if="finish"
+            class="component-important-of-people-chart"
+            canvas-name="important-of-people-right"
+            :canvas-options="option1"
+            width="150"
+            height="150"
+            ref="echart"
+          />
+          <p class="name align-center">五保占总数比例</p>
+        </div>
+        <div class="margin-right-30">
+          <echart-view
+            v-if="finish"
+            class="component-important-of-people-chart"
+            canvas-name="important-of-people-right"
+            :canvas-options="option2"
+            width="150"
+            height="150"
+            ref="echart"
+          />
+          <p class="name align-center">失能占五保比例</p>
+        </div>
       </div>
       <div class="echart-data-info" v-if="finish">
         <div class="item">
@@ -204,12 +210,11 @@ export default {
 <style lang="scss">
 .component-important-of-people {
   flex: 1;
-  .component-important-of-people-chart {
+  .margin-right-30 {
     margin-right: 30px !important;
   }
   .echart-data-info {
-    width: 200px;
-    margin: 0 25px;
+    width: 170px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -225,10 +230,14 @@ export default {
       color: #2fc1ff;
       font-weight: bold;
     }
-    .name {
-      font-size: 12px;
-      color: #ababbf;
-    }
+  }
+  .align-center {
+    margin-top: 18px;
+    text-align: center;
+  }
+  .name {
+    font-size: 12px;
+    color: #ababbf;
   }
 }
 </style>

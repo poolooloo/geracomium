@@ -4,5 +4,5 @@ export default {
   getScreenBaseInfo: 'GetScreenBaseInfo',
   getScreenAgeDistributionByCounty: 'GetScreenAgeDistributionByCounty',
   getOccupancyRateByCounty: 'GetOccupancyRateByCounty',
-  getScreenDiseaseByInstitutionName: 'GetScreenDiseaseByInstitutionName'
+  getScreenDiseaseByInstitutionName: 'GetScreenDiseaseByInstitutionName',
 }

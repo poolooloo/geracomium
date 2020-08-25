@@ -1,11 +1,15 @@
 import {
   Select,
-  Option
+  Option,
+  Dialog,
+  Button
 } from 'element-ui'
 
 const components = [
   Select,
-  Option
+  Option,
+  Dialog,
+  Button
 ]
 
 
