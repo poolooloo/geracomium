@@ -61,58 +61,7 @@ export default {
     return {
       finish: false,
       option,
-      myChart: null,
-      activeIndex: 0,
     };
-  },
-  mounted() {
-    this.init();
-  },
-  methods: {
-    init() {
-      const myChart = (this.myChart = this.$refs.echart.chart);
-      let index = this.activeIndex;
-
-      myChart.dispatchAction({
-        type: "highlight",
-        seriesIndex: 0,
-        dataIndex: 0,
-      });
-
-      myChart.on("mouseover", function (e) {
-        myChart.dispatchAction({
-          type: "downplay",
-          seriesIndex: 0,
-          dataIndex: 0,
-        });
-
-        if (e.dataIndex != index) {
-          myChart.dispatchAction({
-            type: "downplay",
-            seriesIndex: 0,
-            dataIndex: index,
-          });
-        }
-
-        if (e.dataIndex == 0) {
-          myChart.dispatchAction({
-            type: "highlight",
-            seriesIndex: 0,
-            dataIndex: e.dataIndex,
-          });
-        }
-      });
-
-      //当鼠标离开时，把当前项置为选中
-      myChart.on("mouseout", (e) => {
-        index = e.dataIndex;
-        myChart.dispatchAction({
-          type: "highlight",
-          seriesIndex: 0,
-          dataIndex: e.dataIndex,
-        });
-      });
-    },
   },
 };
 </script>

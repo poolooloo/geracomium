@@ -5,6 +5,7 @@
 </template>
 
 <script>
+// 自定义主题 json
 // import customMapConfig from "@/baidu-map/custom-map-config.json";
 
 const position = [
@@ -56,6 +57,7 @@ export default {
       map.clearOverlays && map.clearOverlays();
       map.centerAndZoom(new BaiduMap.Point(x, y), zoom);
       map.setMapStyle({ style: 'dark'});
+      // 自定义主题
       // map.setMapStyle({ styleJson: customMapConfig });
     },
   },

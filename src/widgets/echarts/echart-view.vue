@@ -19,7 +19,8 @@ export default {
   },
   data () {
     return {
-      chart: null,
+      myChart: null,
+      activeIndex: 0,
     };
   },
   mounted() {
@@ -29,9 +30,54 @@ export default {
     renderChart() {
       try {
         const canvasElem = this.$refs[this.canvasName];
-        this.chart = this.$echarts.init(canvasElem, "custom");
-        this.chart.setOption(this.canvasOptions);
+        this.myChart = this.$echarts.init(canvasElem, "custom");
+        this.myChart.setOption(this.canvasOptions);
+        this.init();
       } catch (e) {}
+    },
+    init() {
+      const myChart = this.myChart;
+      let index = this.activeIndex;
+
+      myChart.dispatchAction({
+        type: "highlight",
+        seriesIndex: 0,
+        dataIndex: 0,
+      });
+
+      myChart.on("mouseover", function (e) {
+        myChart.dispatchAction({
+          type: "downplay",
+          seriesIndex: 0,
+          dataIndex: 0,
+        });
+
+        if (e.dataIndex != index) {
+          myChart.dispatchAction({
+            type: "downplay",
+            seriesIndex: 0,
+            dataIndex: index,
+          });
+        }
+
+        if (e.dataIndex == 0) {
+          myChart.dispatchAction({
+            type: "highlight",
+            seriesIndex: 0,
+            dataIndex: e.dataIndex,
+          });
+        }
+      });
+
+      //当鼠标离开时，把当前项置为选中
+      myChart.on("mouseout", (e) => {
+        index = e.dataIndex;
+        myChart.dispatchAction({
+          type: "highlight",
+          seriesIndex: 0,
+          dataIndex: e.dataIndex,
+        });
+      });
     },
   },
 };
