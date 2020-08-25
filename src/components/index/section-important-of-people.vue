@@ -51,8 +51,20 @@ const option1 = {
       radius: ["60%", "80%"],
       avoidLabelOverlap: false,
       label: {
-        show: false,
-        position: "center",
+        normal: {
+          show: false,
+          position: "center",
+          formatter: function (data) {
+            return data.percent + "%" + "\n" + "占比";
+          },
+        },
+        emphasis: {
+          show: true,
+          textStyle: {
+            fontSize: "12",
+            color: "#fff",
+          },
+        },
       },
       emphasis: {
         label: {
@@ -80,8 +92,20 @@ const option2 = {
       radius: ["60%", "80%"],
       avoidLabelOverlap: false,
       label: {
-        show: false,
-        position: "center",
+        normal: {
+          show: false,
+          position: "center",
+          formatter: function (data) {
+            return data.percent + "%" + "\n" + "占比";
+          },
+        },
+        emphasis: {
+          show: true,
+          textStyle: {
+            fontSize: "12",
+            color: "#fff",
+          },
+        },
       },
       emphasis: {
         label: {
@@ -142,10 +166,12 @@ export default {
           {
             name: allPeople.Name,
             value: allPeople.PeopleNum,
+            // percentage: allPeople.Percentage * 100,
           },
           {
             name: this.dataMap.CountyWuBao.Name,
             value: this.dataMap.CountyWuBao.PeopleNum,
+            // percentage: this.dataMap.CountyWuBao.Percentage * 100,
           },
         ];
         this.echartsData2.legendData = [
@@ -156,10 +182,12 @@ export default {
           {
             name: this.dataMap.CountyWuBao.Name,
             value: this.dataMap.CountyWuBao.PeopleNum,
+            // percentage: this.dataMap.CountyWuBao.Percentage * 100,
           },
           {
             name: this.dataMap.CountyWuBaoShiNeng.Name,
             value: this.dataMap.CountyWuBaoShiNeng.PeopleNum,
+            // percentage: this.dataMap.CountyWuBaoShiNeng.Percentage * 100,
           },
         ];
         this.option1.legend.data = this.echartsData1.legendData;

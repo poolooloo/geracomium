@@ -53,8 +53,20 @@ const option = {
       radius: ["60%", "80%"],
       avoidLabelOverlap: false,
       label: {
-        show: false,
-        position: "center",
+        normal: {
+          show: false,
+          position: "center",
+          formatter: function (data) {
+            return data.value + "\n" + data.name;
+          },
+        },
+        emphasis: {
+          show: true,
+          textStyle: {
+            fontSize: "12",
+            color: "#fff",
+          },
+        },
       },
       emphasis: {
         label: {

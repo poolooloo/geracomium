@@ -14,7 +14,7 @@
         <div class="content">
           <p>
             <span class="title">养老服务从业人员数</span>
-            <span class="count">{{ 1 }}</span>
+            <span class="count">{{ count }}</span>
           </p>
           <div class="flex-box item" v-for="(item, index) in sourceData" :key="index">
             <span class="color"></span>
@@ -44,8 +44,20 @@ const option = {
       radius: ["60%", "80%"],
       avoidLabelOverlap: false,
       label: {
-        show: false,
-        position: "center",
+        normal: {
+          show: false,
+          position: "center",
+          formatter: function (data) {
+            return data.value + "\n" + data.name;
+          },
+        },
+        emphasis: {
+          show: true,
+          textStyle: {
+            fontSize: "12",
+            color: "#fff",
+          },
+        },
       },
       emphasis: {
         label: {
@@ -75,6 +87,7 @@ export default {
         seriesData: [],
       },
       dataMap: {},
+      count: 0,
     };
   },
   computed: {
@@ -88,6 +101,7 @@ export default {
       try {
         const data = this.pieDatum.peopleNums[2].List;
         this.sourceData = data;
+        this.count = data.reduce((total, item) => total + item.PeopleNum, 0);
         this.echartsData.legendData = data.map((item) => item.Name);
         this.echartsData.seriesData = data.map((item) => ({
           name: item.Name,

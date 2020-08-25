@@ -15,8 +15,8 @@
         class="component-number-of-people-chart"
         canvas-name="number-of-people"
         :canvas-options="option"
-        width="120"
-        height="120"
+        width="150"
+        height="150"
         ref="echart"
       />
     </echart-wrapper>
@@ -25,23 +25,14 @@
 
 <script>
 import IndexSection from "@/components/section/index-section";
+import { grid } from "@/echarts/echart-options";
+
 const option = {
-  backgroundColor: "#2c343c",
-
-  title: {
-    text: "Customized Pie",
-    left: "center",
-    top: 20,
-    textStyle: {
-      color: "#ccc",
-    },
-  },
-
+  grid,
   tooltip: {
     trigger: "item",
-    formatter: "{a} <br/>{b} : {c} ({d}%)",
+    formatter: " {d}%",
   },
-
   visualMap: {
     show: false,
     min: 80,
@@ -52,9 +43,8 @@ const option = {
   },
   series: [
     {
-      name: "访问来源",
       type: "pie",
-      radius: "55%",
+      radius: "60%",
       center: ["50%", "50%"],
       data: [
         { value: 335, name: "直接访问" },
@@ -67,26 +57,23 @@ const option = {
       }),
       roseType: "radius",
       label: {
-        color: "rgba(255, 255, 255, 0.3)",
+        color: "rgba(255, 255, 255, 1)",
       },
       labelLine: {
-        lineStyle: {
-          color: "rgba(255, 255, 255, 0.3)",
-        },
-        smooth: 0.2,
-        length: 10,
-        length2: 20,
+        show: false,
+        smooth: 0,
+        length: 0,
+        length2: 10,
       },
       itemStyle: {
-        color: "#c23531",
+        color: "#2988e4",
         shadowBlur: 200,
         shadowColor: "rgba(0, 0, 0, 0.5)",
       },
-
       animationType: "scale",
       animationEasing: "elasticOut",
-      animationDelay: function (idx) {
-        return Math.random() * idx * 200;
+      animationDelay: function () {
+        return Math.random() * 200;
       },
     },
   ],
