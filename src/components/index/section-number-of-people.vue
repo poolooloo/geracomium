@@ -2,7 +2,6 @@
   <index-section class="component-number-of-people" title="养老人数分布">
     <echart-wrapper>
       <echart-view
-        v-if="finish || true"
         class="component-number-of-people-chart"
         canvas-name="number-of-people"
         :canvas-options="option"
@@ -58,7 +57,7 @@ export default {
   },
   data() {
     return {
-      option,
+      option
     };
   },
 };

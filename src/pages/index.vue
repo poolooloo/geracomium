@@ -1,6 +1,6 @@
 <template>
   <div class="page-index">
-    <layout-wrapper>
+    <layout-wrapper v-if="loaded">
       <layout-left>
         <gender-of-people />
         <age-of-people />
@@ -28,6 +28,7 @@
   </div>
 </template>
 <script>
+import { mapMutations } from "vuex";
 import { getScreenBaseInfo } from "@/api";
 
 import LayoutLeft from "@/components/layout/layout-left";
@@ -65,14 +66,22 @@ export default {
     LevelCare,
     MapSection,
   },
+  data() {
+    return {
+      loaded: false,
+    };
+  },
   mounted() {
     this.init();
   },
   methods: {
-    init() {
-      getScreenBaseInfo().then((res) => {
-        console.log(res);
-      });
+    ...mapMutations(["SET_PIE_DATA"]),
+    async init() {
+      const data = await getScreenBaseInfo();
+      if (data.Success) {
+        this.loaded = true;
+        this.SET_PIE_DATA(data);
+      }
     },
   },
 };

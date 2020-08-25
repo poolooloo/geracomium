@@ -12,7 +12,6 @@
     </template>
     <echart-wrapper>
       <echart-view
-        v-if="finish || true"
         class="component-check-in-chart"
         canvas-name="check-in"
         :canvas-options="option"

@@ -2,7 +2,6 @@
   <index-section class="component-level-care" title="分级照护">
     <echart-wrapper>
       <echart-view
-        v-if="finish || true"
         class="component-number-of-people-chart"
         canvas-name="number-of-people"
         :canvas-options="option"

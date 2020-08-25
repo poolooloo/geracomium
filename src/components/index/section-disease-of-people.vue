@@ -12,7 +12,6 @@
     </template>
     <echart-wrapper>
       <echart-view
-        v-if="finish || true"
         class="component-number-of-people-chart"
         canvas-name="number-of-people"
         :canvas-options="option"

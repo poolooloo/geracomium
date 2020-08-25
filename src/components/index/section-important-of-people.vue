@@ -2,7 +2,6 @@
   <index-section class="component-important-of-people" title="全县五保老人统计">
     <echart-wrapper>
       <echart-view
-        v-if="finish || true"
         class="component-important-of-people-chart"
         canvas-name="important-of-people-right"
         :canvas-options="option"
@@ -11,7 +10,6 @@
         ref="echart"
       />
       <echart-view
-        v-if="finish || true"
         class="component-important-of-people-chart"
         canvas-name="important-of-people-right"
         :canvas-options="option"

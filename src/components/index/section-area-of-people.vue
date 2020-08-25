@@ -2,7 +2,6 @@
   <index-section class="component-area-of-people" title="全县老人区域分布">
     <!-- ECHARTS -->
     <echart-view
-      v-if="finish || true"
       class="component-gender-of-people-chart"
       canvas-name="gender-of-people"
       :canvas-options="option"
@@ -49,7 +48,6 @@ export default {
   },
   data() {
     return {
-      finish: false,
       option,
     };
   },

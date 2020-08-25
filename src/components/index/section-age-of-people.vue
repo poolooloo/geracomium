@@ -13,7 +13,6 @@
     <!-- ECHARTS -->
     <echart-wrapper>
       <echart-view
-        v-if="finish || true"
         class="component-gender-of-people-chart"
         canvas-name="gender-of-people"
         :canvas-options="option"
@@ -24,6 +23,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import IndexSection from "@/components/section/index-section";
 
 const option = {
@@ -93,7 +93,6 @@ export default {
   data() {
     return {
       option,
-      finish: false,
       options: [
         {
           value: "选项1",
@@ -118,6 +117,12 @@ export default {
       ],
       value: "",
     };
+  },
+  computed: {
+    ...mapState(["pieDatum"]),
+  },
+  mounted() {
+    console.log(this.pieDatum, '全县老人年龄分布');
   },
 };
 </script>
