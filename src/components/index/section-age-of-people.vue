@@ -4,9 +4,9 @@
       <el-select v-model="value" placeholder="请选择">
         <el-option
           v-for="item in options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
+          :key="item.code"
+          :label="item.value"
+          :value="item.code"
         ></el-option>
       </el-select>
     </template>
@@ -93,28 +93,7 @@ export default {
   data() {
     return {
       option,
-      options: [
-        {
-          value: "选项1",
-          label: "黄金糕",
-        },
-        {
-          value: "选项2",
-          label: "双皮奶",
-        },
-        {
-          value: "选项3",
-          label: "蚵仔煎",
-        },
-        {
-          value: "选项4",
-          label: "龙须面",
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭",
-        },
-      ],
+      options: [],
       value: "",
     };
   },
@@ -122,7 +101,16 @@ export default {
     ...mapState(["pieDatum"]),
   },
   mounted() {
-    console.log(this.pieDatum, '全县老人年龄分布');
+    this.init();
+  },
+  methods: {
+    init() {
+      try {
+        const data = this.pieDatum.enumInfo[0].EnumList;
+        this.options = data
+
+      } catch (e) {}
+    },
   },
 };
 </script>

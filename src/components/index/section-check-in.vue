@@ -29,21 +29,28 @@ const option = {
   series: [
     {
       type: "liquidFill", //类型
-      data: [0.7, 0.5, 0.4], //数据是个数组 数组的每一项的值是0-1
+      data: [0.7, 0.7, 0.7], //数据是个数组 数组的每一项的值是0-1
       outline: {
-        //show: true , //是否显示轮廓 布尔值
+        show: true, //是否显示轮廓 布尔值
         borderDistance: 0, //外部轮廓与图表的距离 数字
         itemStyle: {
-          //borderColor:'rgba(255,0,0,0.09)', //边框的颜色
+          borderColor: "rgba(0,0,0,0.09)", //边框的颜色
           borderWidth: 0, //边框的宽度
-          //shadowBlur: 5 , //外部轮廓的阴影范围 一旦设置了内外都有阴影
-          //shadowColor: '#000' //外部轮廓的阴影颜色
+          // shadowBlur: 5 , //外部轮廓的阴影范围 一旦设置了内外都有阴影
+          shadowColor: "#000", //外部轮廓的阴影颜色
         },
       },
+      label: {
+        formatter: function (param) {
+          return param.value * 100 + "%" + "\n" + "入住率";
+        },
+        fontSize: 16,
+        fontWeight: 400,
+      },
       backgroundStyle: {
-        color: "rgba(255,0,0,0.1)", //图表的背景颜色
-        //borderWidth: '10',//图表的边框宽度
-        //borderColor: '#000',//图表的边框颜色
+        color: "rgba(0,0,0,0)", //图表的背景颜色
+        borderWidth: "1", //图表的边框宽度
+        borderColor: "rgba(72,89,142,1)", //图表的边框颜色
         itemStyle: {
           shadowBlur: 100, //设置无用
           shadowColor: "#f60", //设置无用
@@ -57,10 +64,10 @@ const option = {
       },
       emphasis: {
         itemStyle: {
-          opacity: 1, //鼠标经过波浪颜色的透明度
+          opacity: 0.8, //鼠标经过波浪颜色的透明度
         },
       },
-      color: ["rgba(255,0,0,0.3)", "rgba(255,0,0,0.3)", "rgba(255,0,0,0.3)"], //水波的颜色 对应的是data里面值
+      color: ["#FCB25B", "#FCB25B", "#FCB25B"], //水波的颜色 对应的是data里面值
       shape: "circle", //水填充图的形状 circle默认圆形  rect圆角矩形  triangle三角形  diamond菱形  pin水滴状 arrow箭头状  还可以是svg的path
       center: ["50%", "50%"], //图表相对于盒子的位置 第一个是水平的位置 第二个是垂直的值 默认是[50%,50%]是在水平和垂直方向居中 可以设置百分比 也可以设置具体值
       radius: "80%", //图表的大小 值是圆的直径 可以是百分比 也可以是具体值 100%则占满整个盒子 默认是40%; 百分比下是根据宽高最小的一个为参照依据
