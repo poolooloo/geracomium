@@ -1,14 +1,14 @@
 <template>
   <index-section class="component-area-of-people" title="全县老人区域分布">
     <!-- ECHARTS -->
-    <echart-wrapper>
+    <echart-wrapper class="echart-wrapper">
       <echart-view
         v-if="finish"
         class="component-gender-of-people-chart"
         canvas-name="gender-of-people"
         :canvas-options="option"
-        width="470"
-        height="600"
+        width="450"
+        height="550"
       />
     </echart-wrapper>
   </index-section>
@@ -20,14 +20,14 @@ import IndexSection from "@/components/section/index-section";
 import { xColor } from "@/echarts/echart-options";
 
 const option = {
-  grid:{
-    left: '0',
-    right: '0',
-    bottom: '0',
-    top: '0',
-    height: '95%',
-    width: '94%',
-    containLabel: true
+  grid: {
+    left: "0",
+    right: "0",
+    bottom: "0",
+    top: "0",
+    height: "90%",
+    width: "90%",
+    containLabel: true,
   },
   color: ["#2988e4"],
   yAxis: [
@@ -127,8 +127,10 @@ export default {
 };
 </script>
 <style lang="scss">
-.component-area-of-people{
-  height: 440px;
-  overflow: auto;
+.component-area-of-people {
+  .echart-wrapper {
+    height: 455px;
+    overflow: auto;
+  }
 }
 </style>

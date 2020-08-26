@@ -49,6 +49,8 @@ import CheckIn from "@/components/index/section-check-in";
 import LevelCare from "@/components/index/section-level-care";
 import DiseaseOfPeople from "@/components/index/section-disease-of-people";
 
+import env from '@/api/api-env'
+
 export default {
   components: {
     LayoutLeft,
@@ -81,6 +83,11 @@ export default {
       if (data.Success) {
         this.loaded = true;
         this.SET_PIE_DATA(data);
+        env !== 'prod' && this.$nextTick(() => {
+          // 缩放测试
+          // document.getElementsByTagName("html")[0].style =
+          //   "transform: translate(-10%,-10%) scale(0.6);";
+        });
       }
     },
   },
@@ -99,7 +106,7 @@ export default {
     margin: 0 auto 15px;
     width: 483.7px;
     height: 70.5px;
-    text-indent: -100vw;
+    text-indent: -200vw;
     background-color: $base-bgcolor;
     background-image: url("../assets/images/title-bg.png");
     background-size: cover;

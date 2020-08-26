@@ -20,7 +20,7 @@ export default {
   data () {
     return {
       myChart: null,
-      activeIndex: 0,
+      activeIndex: 1,
     };
   },
   mounted() {
@@ -42,14 +42,14 @@ export default {
       myChart.dispatchAction({
         type: "highlight",
         seriesIndex: 0,
-        dataIndex: 0,
+        dataIndex: 1,
       });
 
       myChart.on("mouseover", function (e) {
         myChart.dispatchAction({
           type: "downplay",
           seriesIndex: 0,
-          dataIndex: 0,
+          dataIndex: 1,
         });
 
         if (e.dataIndex != index) {

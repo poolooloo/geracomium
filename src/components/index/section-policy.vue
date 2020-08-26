@@ -7,9 +7,11 @@
         :key="i"
         @click="openPolicyInfo(item)"
       >
-        <i class="icon-text">icon</i>
-        <p class="info">{{ item.Title }}</p>
-        <i class="arrow-right"></i>
+        <div class="flex-box">
+          <svg-icon icon="file"></svg-icon>
+          <p class="info">{{ item.Title }}</p>
+        </div>
+        <svg-icon icon="arrow"></svg-icon>
       </div>
     </div>
 
@@ -71,9 +73,20 @@ export default {
   flex: 1;
   .policy-wrapper {
     margin-top: 27px;
+    max-height: 175px;
     overflow: auto;
   }
+  .flex-box,
   .policy-item {
+    display: flex;
+    align-items: center;
+  }
+  .icon {
+    color: #6c779b;
+  }
+  .policy-item {
+    justify-content: space-between;
+    margin-bottom: 5px;
     padding: 0 10px;
     line-height: 28px;
     font-size: 12px;
@@ -106,7 +119,8 @@ export default {
     width: inherit !important;
   }
   tbody {
-    td,tr {
+    td,
+    tr {
       height: inherit;
     }
   }

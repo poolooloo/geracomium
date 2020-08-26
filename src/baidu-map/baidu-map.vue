@@ -1,12 +1,18 @@
 <template>
   <div class="component-baidu-map">
     <div id="container"></div>
+    <map-info />
+    <map-icon-bar />
+    <map-aside />
   </div>
 </template>
 
 <script>
 // 自定义主题 json
 // import customMapConfig from "@/baidu-map/custom-map-config.json";
+import mapAside from "./map-aside";
+import mapIconBar from "./map-icon-bar";
+import mapInfo from "./map-info";
 
 const position = [
   {
@@ -17,6 +23,11 @@ const position = [
 
 export default {
   name: "baidu-map",
+  components: {
+    mapAside,
+    mapIconBar,
+    mapInfo,
+  },
   mounted() {
     this.init();
   },
@@ -56,9 +67,17 @@ export default {
 
       map.clearOverlays && map.clearOverlays();
       map.centerAndZoom(new BaiduMap.Point(x, y), zoom);
-      map.setMapStyle({ style: 'dark'});
+      map.setMapStyle({ style: "dark" });
       // 自定义主题
       // map.setMapStyle({ styleJson: customMapConfig });
+
+      // 隐藏 BAIDU LOGO
+      setTimeout(() => {
+        const logo = document.querySelectorAll(".anchorBL");
+        logo.forEach((elem) => {
+          elem.style = "display: none;";
+        });
+      }, 1e3);
     },
   },
 };
@@ -66,10 +85,35 @@ export default {
 
 <style lang="scss">
 .component-baidu-map {
+  position: relative;
   width: 100%;
   height: 100%;
   #container {
     height: 100%;
+  }
+  .map-info,
+  .map-icon-bar,
+  .map-aside {
+    position: absolute;
+    z-index: 1;
+  }
+
+  .map-info {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .map-icon-bar {
+    left: 20px;
+    bottom: 24px;
+  }
+
+  .map-aside {
+    width: 178px;
+    max-height: calc(100% - 48px);
+    top: 24px;
+    right: 24px;
   }
 }
 </style>

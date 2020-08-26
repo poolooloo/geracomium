@@ -1,7 +1,7 @@
-import prefix from './api-prefix'
-import mock from './api-mock'
-import prod from './api-prod'
-import env from './api-env'
+import prefix from '@/api/api-prefix'
+import mock from '@/api/api-mock'
+import prod from '@/api/api-prod'
+import env from '@/api/api-env'
 
 const urlMap = {
   mock,

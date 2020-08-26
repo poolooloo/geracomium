@@ -4,9 +4,9 @@
       <el-select v-model="value" placeholder="请选择">
         <el-option
           v-for="item in options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
+          :key="item.code"
+          :label="item.value"
+          :value="item.code"
         ></el-option>
       </el-select>
     </template>
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import IndexSection from "@/components/section/index-section";
 import echartsLiquidfill from "echarts-liquidfill";
 console.log(echartsLiquidfill, "use echartsLiquidfill");
@@ -91,6 +92,9 @@ export default {
   components: {
     IndexSection,
   },
+  computed: {
+    ...mapState(["pieDatum"]),
+  },
   data() {
     return {
       options: [
@@ -118,6 +122,18 @@ export default {
       option,
       value: "",
     };
+  },
+  mounted() {
+    this.init();
+  },
+  methods: {
+    init() {
+      try {
+        const data = this.pieDatum.enumInfo[0].EnumList;
+        this.options = data
+
+      } catch (e) {}
+    },
   },
 };
 </script>

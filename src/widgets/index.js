@@ -1,9 +1,11 @@
 import EchartWrapper  from '@/widgets/echarts/echart-wrapper'
 import EchartView from '@/widgets/echarts/echart-view'
+import SvgIcon from '@/widgets/svg-icon'
 
 const components = [
   EchartWrapper,
-  EchartView
+  EchartView,
+  SvgIcon
 ]
 
 const install = Vue => {

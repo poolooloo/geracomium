@@ -52,6 +52,13 @@ p {
 }
 
 .global-body {
+  .icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+  }
   .el-select-dropdown,
   .el-input__inner {
     width: 124px;
@@ -99,7 +106,7 @@ p {
   .el-dialog {
     background-color: rgba(1, 21, 52, 0.9);
   }
-  .el-dialog__title{
+  .el-dialog__title {
     font-size: 12px;
     color: #fff;
   }

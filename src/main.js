@@ -8,7 +8,7 @@ import '@/utils/register'
 import '@/echarts'
 import '@/styles/reset.scss'
 import '@/styles/common.scss'
-
+import '@/iconfont/iconfont'
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(Widgets)

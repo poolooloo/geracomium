@@ -9,6 +9,5 @@
   min-width: 508px;
   height: 100%;
   padding: px2vh(80) px2vw(24) px2vh(24);
-  overflow: auto;
 }
 </style>

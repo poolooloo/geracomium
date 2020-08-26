@@ -1,4 +1,4 @@
-import env from './api-env'
+import env from '@/api/api-env'
 
 // api url 前缀目录，个别项目存在。
 const prefix = {
