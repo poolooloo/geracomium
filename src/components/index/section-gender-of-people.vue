@@ -49,6 +49,7 @@ import { mapState } from "vuex";
 import IndexSection from "@/components/section/index-section";
 
 const option = {
+  color: ["#da7804", "#54c6e7", "#2988E4"],
   legend: {
     orient: "vertical",
     left: 10,
@@ -64,14 +65,14 @@ const option = {
           show: false,
           position: "center",
           formatter: function (data) {
-            return data.value + "\n" + data.name;
+            return data.value + "\n\n" + data.name;
           },
         },
         emphasis: {
           show: true,
           textStyle: {
             fontSize: "12",
-            color: "#fff",
+            color: "rgb(47, 194, 255)",
           },
         },
       },
@@ -116,7 +117,7 @@ export default {
       try {
         const data = this.pieDatum.peopleNums[0].List;
         data.forEach((item) => {
-          item.Percentage = (item.Percentage).toFixed(2)
+          item.Percentage = item.Percentage.toFixed(2);
           this.dataMap[item.Code] = item;
         });
 

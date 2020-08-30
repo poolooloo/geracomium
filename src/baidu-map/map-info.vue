@@ -9,12 +9,12 @@
     <div class="info-content">
       <p class="info-header inner-title">
         <span class="title">{{infoData.InstitutionName}}</span>
-        <span>{{infoData.Nature}}</span>
+        <span style="color: #2FC2FF;">{{infoData.Nature}}</span>
       </p>
       <div class="image-wrapper">
         <img :src="infoData.PhotoUrl[0]" alt />
       </div>
-      <ul class="util-flex">
+      <ul class="price util-flex">
         <li>
           <span class="count font-blue">{{infoData.SumBed}}</span>
           <span class="name">总床位数</span>
@@ -28,9 +28,17 @@
           <span class="name">参考价格</span>
         </li>
       </ul>
-      <p class="address">{{infoData.Address}}</p>
-      <p class="tel">{{infoData.Tel}}</p>
-      <p class="info">{{infoData.Synopsis}}</p>
+      <p class="address util-flex">
+        <svg-icon icon="position"></svg-icon>
+        <span>{{infoData.Address}}</span>
+      </p>
+      <p class="tel util-flex">
+        <svg-icon icon="tel"></svg-icon>
+        <span>{{infoData.Tel}}</span>
+      </p>
+      <p class="info">
+        <span>{{infoData.Synopsis}}</span>
+      </p>
     </div>
   </div>
 </template>
@@ -62,7 +70,7 @@ export default {
 .map-info {
   width: 267px;
   padding: 12px;
-  background-color: rgba(1, 22, 52, 0.5);
+  background-color: rgba(1, 22, 52, 0.8);
   border: 1px solid rgba(218, 120, 4, 1);
   .info-header {
     display: flex;
@@ -73,7 +81,7 @@ export default {
   .inner-title {
     line-height: 40px;
   }
-  .util-flex {
+  .price.util-flex {
     margin-top: 10px;
     justify-content: space-between;
     li {
@@ -118,9 +126,14 @@ export default {
   }
   .address,
   .tel {
+    align-items: center;
     font-size: 12px;
     color: #fff;
     line-height: 20px;
+    .icon{
+      color: #718EB9;
+      margin-right: 8px;
+    }
   }
   .info {
     margin-top: 16px;

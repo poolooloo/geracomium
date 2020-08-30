@@ -60,10 +60,11 @@ const option = {
       },
       label: {
         formatter: function (param) {
-          return param.value * 100 + "%" + "\n" + "入住率";
+          return param.value * 100 + "%" + "\n\n" + "入住率";
         },
         fontSize: 16,
         fontWeight: 400,
+        color: 'rgb(47, 194, 255)',
       },
       backgroundStyle: {
         color: "rgba(0,0,0,0)", //图表的背景颜色

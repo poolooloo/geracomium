@@ -69,7 +69,8 @@ const option = {
       },
       emphasis: {
         label: {
-          fontSize: 20,
+          fontSize: 16,
+          color: "rgb(47, 194, 255)",
         },
       },
       data: [],
@@ -98,9 +99,7 @@ export default {
     this.renderChart();
   },
   methods: {
-    ...mapMutations([
-      'SET_AGE_DATA'
-    ]),
+    ...mapMutations(["SET_AGE_DATA"]),
     async getData() {
       this.finish = false;
       const data = await getScreenAgeDistributionByCounty({
@@ -118,15 +117,15 @@ export default {
     renderChart() {
       try {
         this.option.legend.data = this.ageDatum.List.map((item) => item.Name);
-        this.option.series[0].data = this.ageDatumList = this.ageDatum.List.map(
-          (item) => {
-            return {
-              name: item.Name,
-              value: item.PeopleNum,
-              percentage: (item.Percentage * 100).toFixed(0) + "%",
-            };
-          }
-        ).sort((a, b) => a.value - b.value);
+        const __data = this.ageDatum.List.map((item) => {
+          return {
+            name: item.Name,
+            value: item.PeopleNum,
+            percentage: (item.Percentage * 100).toFixed(0) + "%",
+          };
+        });
+        this.ageDatumList = __data.concat()
+        this.option.series[0].data =  __data;
         this.finish = true;
       } catch (e) {}
     },
@@ -151,7 +150,7 @@ export default {
     }
     li {
       display: flex;
-      margin-bottom: 16px;
+      line-height: 30px;
     }
   }
   .name {

@@ -9,7 +9,7 @@
 
 <script>
 // 自定义主题 json
-// import customMapConfig from "@/baidu-map/custom-map-config.json";
+import customMapConfig from "@/baidu-map/custom-map-config.json";
 import { mapState } from "vuex";
 import mapAside from "./map-aside";
 import mapIconBar from "./map-icon-bar";
@@ -68,9 +68,9 @@ export default {
 
       map.clearOverlays && map.clearOverlays();
       map.centerAndZoom(new BaiduMap.Point(XCoordinate, YCoordinate), zoom);
-      map.setMapStyle({ style: "dark" });
+      // map.setMapStyle({ style: "dark" });
       // 自定义主题
-      // map.setMapStyle({ styleJson: customMapConfig });
+      map.setMapStyle({ styleJson: customMapConfig });
 
       // 定位
       const govList = this.pieDatum.screeninstitution.institutionList;
@@ -121,7 +121,7 @@ export default {
       const marker = new BaiduMap.Marker(point, {
         icon: new BaiduMap.Icon(
           `./images/${type}-min.png`,
-          new BaiduMap.Size(40, 40)
+          new BaiduMap.Size(25, 25)
         ),
       }); // 创建标注
       map.addOverlay(marker);
@@ -152,7 +152,7 @@ export default {
 
   .map-info {
     top: 50%;
-    left: 50%;
+    left: 40%;
     transform: translate(-50%, -50%);
   }
 

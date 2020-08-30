@@ -47,14 +47,14 @@ const option = {
           show: false,
           position: "center",
           formatter: function (data) {
-            return data.value + "\n" + data.name;
+            return data.value + "\n\n" + data.name;
           },
         },
         emphasis: {
           show: true,
           textStyle: {
             fontSize: "12",
-            color: "#fff",
+            color: "rgb(47, 194, 255)",
           },
         },
       },

@@ -60,14 +60,14 @@ const option1 = {
           show: false,
           position: "center",
           formatter: function (data) {
-            return data.percent + "%" + "\n" + "占比";
+            return data.percent + "%" + "\n\n" + "占比";
           },
         },
         emphasis: {
           show: true,
           textStyle: {
             fontSize: "12",
-            color: "#fff",
+            color: "rgb(47, 194, 255)",
           },
         },
       },
@@ -101,14 +101,14 @@ const option2 = {
           show: false,
           position: "center",
           formatter: function (data) {
-            return data.percent + "%" + "\n" + "占比";
+            return data.percent + "%" + "\n\n" + "占比";
           },
         },
         emphasis: {
           show: true,
           textStyle: {
             fontSize: "12",
-            color: "#fff",
+            color: "rgb(47, 194, 255)",
           },
         },
       },
