@@ -5,7 +5,7 @@
       <svg-icon icon="triangle"></svg-icon>
     </p>
     <ul class="gov-list">
-      <li class="gov-item" v-for="(item, i) in govList" :key="i">
+      <li class="gov-item" v-for="(item, i) in govList" :key="i" @click="showInfo(item)">
         <svg-icon icon="gov"></svg-icon>
         <span class="gov-item-name">{{ item.InstitutionName }}</span>
       </li>
@@ -31,6 +31,11 @@ export default {
       this.govList = govList;
       this.count = this.govList.length;
     } catch (e) {}
+  },
+  methods: {
+    showInfo(item) {
+      this.$EventBus.$emit("SHOW_MARKER_INFO", item);
+    },
   },
 };
 </script>

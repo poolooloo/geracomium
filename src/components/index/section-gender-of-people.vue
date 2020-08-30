@@ -116,6 +116,7 @@ export default {
       try {
         const data = this.pieDatum.peopleNums[0].List;
         data.forEach((item) => {
+          item.Percentage = (item.Percentage).toFixed(2)
           this.dataMap[item.Code] = item;
         });
 
