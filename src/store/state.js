@@ -2,5 +2,6 @@ export default {
   user: {
     token: ''
   },
-  pieDatum: {}
+  pieDatum: {},
+  liquidFill: {}
 }

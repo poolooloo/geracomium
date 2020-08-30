@@ -21,6 +21,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: 6px;
   .component-index-section-header__title {
     position: relative;
     padding: 0 0 4px 8px;

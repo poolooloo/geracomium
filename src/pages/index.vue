@@ -29,7 +29,12 @@
 </template>
 <script>
 import { mapMutations } from "vuex";
-import { getScreenBaseInfo } from "@/api";
+import {
+  getScreenBaseInfo,
+  getScreenAgeDistributionByCounty,
+  getOccupancyRateByCounty,
+  getScreenDiseaseByInstitutionName,
+} from "@/api";
 
 import LayoutLeft from "@/components/layout/layout-left";
 import LayoutRight from "@/components/layout/layout-right";
@@ -49,7 +54,7 @@ import CheckIn from "@/components/index/section-check-in";
 import LevelCare from "@/components/index/section-level-care";
 import DiseaseOfPeople from "@/components/index/section-disease-of-people";
 
-import env from '@/api/api-env'
+import env from "@/api/api-env";
 
 export default {
   components: {
@@ -77,17 +82,29 @@ export default {
     this.init();
   },
   methods: {
-    ...mapMutations(["SET_PIE_DATA"]),
+    ...mapMutations(["SET_PIE_DATA", "SET_LIQUID_FILL"]),
     async init() {
       const data = await getScreenBaseInfo();
+      const data2 = await getScreenAgeDistributionByCounty({ CountyName: "" });
+      const data3 = await getOccupancyRateByCounty({ CountyName: "" });
+      const data4 = await getScreenDiseaseByInstitutionName({
+        InstitutionName: "",
+      });
+      console.log({
+        data2,
+        data3,
+        data4,
+      });
       if (data.Success) {
         this.loaded = true;
         this.SET_PIE_DATA(data);
-        env !== 'prod' && this.$nextTick(() => {
-          // 缩放测试
-          // document.getElementsByTagName("html")[0].style =
-          //   "transform: translate(-10%,-10%) scale(0.6);";
-        });
+        this.SET_LIQUID_FILL(data3);
+        env !== "prod" &&
+          this.$nextTick(() => {
+            // 缩放测试
+            // document.getElementsByTagName("html")[0].style =
+            //   "transform: translate(-10%,-10%) scale(0.6);";
+          });
       }
     },
   },

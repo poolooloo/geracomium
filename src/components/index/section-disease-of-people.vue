@@ -10,13 +10,11 @@
         ></el-option>
       </el-select>
     </template>
-    <echart-wrapper style="height: inherit;">
+    <echart-wrapper class="util-flex" style="height: inherit;">
       <echart-view
         class="component-number-of-people-chart"
         canvas-name="number-of-people"
         :canvas-options="option"
-        width="170"
-        height="170"
         ref="echart"
       />
     </echart-wrapper>

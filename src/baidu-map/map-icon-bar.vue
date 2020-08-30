@@ -1,7 +1,11 @@
 <template>
   <div class="map-icon-bar">
     <div class="bar-item" v-for="(item,i) in icons" :key="i">
-      <svg-icon :icon="iconNames[i]"></svg-icon>
+      <svg-icon
+        :icon="iconNames[i].name"
+        :style="{
+          color: iconNames[i].color
+        }"></svg-icon>
       <span class="bar-item-name">{{item.code}}</span>
       <span>({{item.value}})</span>
     </div>
@@ -13,7 +17,20 @@ export default {
   data() {
     return {
       icons: [],
-      iconNames: ['gov', 'country', 'home']
+      iconNames: [
+        {
+          name: "gov",
+          color: "#fdc800",
+        },
+        {
+          name: "country",
+          color: "#da4459",
+        },
+        {
+          name: "home",
+          color: "#69ef9e",
+        },
+      ],
     };
   },
   computed: {
@@ -43,7 +60,7 @@ export default {
       margin-right: 0;
     }
   }
-  .bar-item-name{
+  .bar-item-name {
     margin: 0 4px 0 7px;
   }
 }

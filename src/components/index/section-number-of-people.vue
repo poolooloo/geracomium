@@ -6,8 +6,6 @@
         class="component-number-of-people-chart"
         canvas-name="number-of-people"
         :canvas-options="option"
-        width="150"
-        height="150"
       />
       <div class="echart-data-info" v-if="finish">
         <div class="flex-box item" v-for="(item, index) in sourceData" :key="index">

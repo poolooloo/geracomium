@@ -10,9 +10,7 @@ export default {
 </script>
 <style lang="scss">
 .component-echart-wrapper{
-  min-height: 170px;
-  height: px2vh(170);
-  padding-top: 20px;
-  margin-bottom: 20px;
+  min-height: 205px;
+  height: px2vh(205);
 }
 </style>

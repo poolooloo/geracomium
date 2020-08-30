@@ -11,12 +11,10 @@
       </el-select>
     </template>
     <!-- ECHARTS -->
-    <echart-wrapper>
+    <echart-wrapper class="util-flex">
       <echart-view
-        class="component-gender-of-people-chart"
         canvas-name="gender-of-people"
         :canvas-options="option"
-        width="400"
       />
     </echart-wrapper>
   </index-section>

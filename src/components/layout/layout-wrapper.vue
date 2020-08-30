@@ -41,7 +41,6 @@
     transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
-    justify-content: center;
     border: 1px solid #00a0e8;
   }
 
@@ -99,6 +98,9 @@
     position: absolute;
     width: 600px;
     top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 1px;
     &::after,
     &::before {
       content: "";

@@ -6,17 +6,15 @@
         class="component-gender-of-people-chart"
         canvas-name="gender-of-people"
         :canvas-options="option"
-        width="150"
-        height="150"
       />
       <div class="echart-data-info" v-if="dataMap&& dataMap.CountyPeople">
         <div class="flex-box">
           <div class="flex-left">
-            <p class="font-20">{{ dataMap.CountyPeople.PeopleNum }}</p>
+            <p class="font-20">{{ dataMap.CountyPeople.PeopleNum }} <svg-icon style="color:#464968;" icon="arrow1"/>  </p>
             <p class="font-color-gray">全县总人数</p>
           </div>
           <div class="flex-right">
-            <p class="font-20">{{ dataMap.CountyOldPeople.PeopleNum }}</p>
+            <p class="font-20">{{ dataMap.CountyOldPeople.PeopleNum }} <svg-icon style="color:#464968;" icon="arrow1"/> </p>
             <p class="font-color-gray">老人总数</p>
           </div>
         </div>
@@ -149,10 +147,6 @@ export default {
   .flex-box {
     display: flex;
   }
-  .echart-data-info {
-    width: 250px;
-    margin-left: 25px;
-  }
   .flex-left {
     padding-right: 25px;
     border-right: 1px solid #81a3d7;
@@ -194,6 +188,11 @@ export default {
       height: 10px;
       margin-right: 10px;
     }
+  }
+  .echart-data-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 </style>

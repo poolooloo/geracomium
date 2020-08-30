@@ -2,26 +2,22 @@
   <index-section class="component-important-of-people" title="全县五保老人统计">
     <echart-wrapper class="flex-box">
       <div class="echarts flex-box">
-        <div class="margin-right-30">
+        <div class="util-flex">
           <echart-view
             v-if="finish"
             class="component-important-of-people-chart"
             canvas-name="important-of-people-right"
             :canvas-options="option1"
-            width="150"
-            height="150"
             ref="echart"
           />
           <p class="name align-center">五保占总数比例</p>
         </div>
-        <div class="margin-right-30">
+        <div class="util-flex">
           <echart-view
             v-if="finish"
             class="component-important-of-people-chart"
             canvas-name="important-of-people-right"
             :canvas-options="option2"
-            width="150"
-            height="150"
             ref="echart"
           />
           <p class="name align-center">失能占五保比例</p>
@@ -210,9 +206,6 @@ export default {
 <style lang="scss">
 .component-important-of-people {
   flex: 1;
-  .margin-right-30 {
-    margin-right: 30px !important;
-  }
   .echart-data-info {
     width: 170px;
     display: flex;
@@ -238,6 +231,13 @@ export default {
   .name {
     font-size: 12px;
     color: #ababbf;
+  }
+  .util-flex {
+    margin-top: 20px;
+    display: block;
+    .component-echart-view {
+      height: 150px;
+    }
   }
 }
 </style>

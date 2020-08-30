@@ -6,7 +6,8 @@
 
 <style lang="scss">
 .component-layout-center {
-  flex: 1;
+  width: px2vw(870);
+  min-width: 870px;
   height: 100%;
 }
 </style>

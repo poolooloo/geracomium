@@ -5,5 +5,9 @@ export default {
   [types.SET_PIE_DATA](state, payload) {
     state.pieDatum = payload
     console.log(state, 'SET_PIE_DATA')
+  },
+  [types.SET_LIQUID_FILL](state, payload) {
+    state.liquidFill = payload
+    console.log(state, 'SET_LIQUID_FILL')
   }
 }

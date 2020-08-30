@@ -19,7 +19,4 @@ export default {
 };
 </script>
 <style lang="scss">
-.component-index-section{
-  margin-bottom: 36px;
-}
 </style>

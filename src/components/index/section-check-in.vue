@@ -2,20 +2,31 @@
   <index-section class="component-check-in" title="机构入住率">
     <template #section-select>
       <el-select v-model="value" placeholder="请选择">
-        <el-option
-          v-for="item in options"
-          :key="item.code"
-          :label="item.value"
-          :value="item.code"
-        ></el-option>
+        <el-option v-for="item in options" :key="item.code" :label="item.value" :value="item.code"></el-option>
       </el-select>
     </template>
-    <echart-wrapper>
+    <echart-wrapper class="util-flex">
       <echart-view
+        v-if="finish"
         class="component-check-in-chart"
         canvas-name="check-in"
         :canvas-options="option"
       />
+      <div class="echart-info">
+        <p v-if="sheckInSumNumMap.freeSumNum" class="freeSumNum">
+          {{sheckInSumNumMap.freeSumNum.PeopleNum}}
+          <svg-icon style="color:#464968;" icon="arrow1" />
+        </p>
+        <p class="font-gray">{{ sheckInSumNumMap.freeSumNum.Name }}</p>
+        <p class="util-flex sheckInSumNum">
+          <span class="name">{{sheckInSumNumMap.sheckInSumNum.Name}}</span>
+          <span class="font-white">{{sheckInSumNumMap.sheckInSumNum.PeopleNum}}</span>
+        </p>
+        <p class="util-flex sumBedSumNum">
+          <span class="name">{{sheckInSumNumMap.sumBedSumNum.Name}}</span>
+          <span class="font-white">{{sheckInSumNumMap.sumBedSumNum.PeopleNum}}</span>
+        </p>
+      </div>
     </echart-wrapper>
   </index-section>
 </template>
@@ -93,34 +104,15 @@ export default {
     IndexSection,
   },
   computed: {
-    ...mapState(["pieDatum"]),
+    ...mapState(["liquidFill", "pieDatum"]),
   },
   data() {
     return {
-      options: [
-        {
-          value: "选项1",
-          label: "黄金糕",
-        },
-        {
-          value: "选项2",
-          label: "双皮奶",
-        },
-        {
-          value: "选项3",
-          label: "蚵仔煎",
-        },
-        {
-          value: "选项4",
-          label: "龙须面",
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭",
-        },
-      ],
+      options: [],
+      finish: false,
       option,
       value: "",
+      sheckInSumNumMap: {},
     };
   },
   mounted() {
@@ -130,8 +122,17 @@ export default {
     init() {
       try {
         const data = this.pieDatum.enumInfo[0].EnumList;
-        this.options = data
-
+        this.options = data;
+        const sheckInSumNumMap = this.liquidFill.List.reduce((total, item) => {
+          total[item.Code] = item;
+          return total;
+        }, {});
+        console.log(sheckInSumNumMap);
+        this.option.series[0].data = new Array(3).fill(
+          sheckInSumNumMap.sheckInSumNum.Percentage
+        );
+        this.sheckInSumNumMap = sheckInSumNumMap;
+        this.finish = true;
       } catch (e) {}
     },
   },
@@ -139,4 +140,32 @@ export default {
 </script>
 
 <style lang="scss">
+.component-check-in {
+  .echart-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .name {
+    width: 65px;
+  }
+  .font-white {
+    color: #fff;
+  }
+  .freeSumNum {
+    font-size: 20px;
+    color: #2fc2ff;
+  }
+  .font-gray {
+    margin: 8px 0;
+    font-size: 12px;
+    color: #abacc0;
+  }
+  .sheckInSumNum,
+  .sumBedSumNum {
+    font-size: 12px;
+    color: #d0ecff;
+    line-height: 30px;
+  }
+}
 </style>

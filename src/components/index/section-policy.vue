@@ -87,7 +87,7 @@ export default {
   .policy-item {
     justify-content: space-between;
     margin-bottom: 5px;
-    padding: 0 10px;
+    padding-left: 10px;
     line-height: 28px;
     font-size: 12px;
     color: #d0ecff;
@@ -100,7 +100,7 @@ export default {
   }
   .info {
     margin-left: 5px;
-    max-width: 260px;
+    max-width: 240px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

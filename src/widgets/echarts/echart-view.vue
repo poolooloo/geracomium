@@ -1,23 +1,31 @@
 <template>
-  <canvas
-    class="component-echart-view"
-    :width="450"
-    :height="170"
-    :ref="canvasName"
-    v-if="canvasName"
-  ></canvas>
+  <div class="component-echart-view">
+    <canvas class="canvas"
+      :ref="canvasName"
+      v-if="canvasName"
+      :width="width"
+      :height="height"></canvas>
+  </div>
 </template>
 <script>
 export default {
-  name: 'echart-view',
+  name: "echart-view",
   props: {
+    width: {
+      type: String,
+      default: () => "205",
+    },
+    height: {
+      type: String,
+      default: () => "150",
+    },
     canvasName: String,
     canvasOptions: {
       type: Object,
       default: null,
     },
   },
-  data () {
+  data() {
     return {
       myChart: null,
       activeIndex: 1,
@@ -84,7 +92,13 @@ export default {
 </script>
 <style lang="scss">
 .component-echart-view {
-  display: block;
-  margin: 0 auto !important;
+  position: relative;
+  width: 205px;
+  .canvas {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+  }
 }
 </style>

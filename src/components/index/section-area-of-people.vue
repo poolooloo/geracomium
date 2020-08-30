@@ -1,14 +1,13 @@
 <template>
   <index-section class="component-area-of-people" title="全县老人区域分布">
     <!-- ECHARTS -->
-    <echart-wrapper class="echart-wrapper">
+    <echart-wrapper>
       <echart-view
+        width="450"
+        height="560"
         v-if="finish"
-        class="component-gender-of-people-chart"
         canvas-name="gender-of-people"
         :canvas-options="option"
-        width="450"
-        height="550"
       />
     </echart-wrapper>
   </index-section>
@@ -128,9 +127,16 @@ export default {
 </script>
 <style lang="scss">
 .component-area-of-people {
-  .echart-wrapper {
-    height: 455px;
+  .component-echart-view {
+    width: 100%;
+    height: 400px;
     overflow: auto;
+    margin-top: 30px;
+    .canvas {
+      position: static;
+      top: 0;
+      transform: translateY(0);
+    }
   }
 }
 </style>
