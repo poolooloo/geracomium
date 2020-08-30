@@ -1,5 +1,6 @@
 <template>
-  <index-section class="component-level-care" title="分级照护">
+  <index-section class="component-level-care"
+    :title="pieDatum && pieDatum.peopleNums[2] ? pieDatum.peopleNums[2].ScreenName : '分级照护'">
     <echart-wrapper class="flex-box">
       <echart-view
         v-if="finish"

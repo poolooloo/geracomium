@@ -1,7 +1,7 @@
 <template>
-  <index-section class="component-check-in" title="机构入住率">
+  <index-section class="component-check-in" :title="liquidFill.ScreenName || '机构入住率'">
     <template #section-select>
-      <el-select v-model="value" placeholder="请选择">
+      <el-select v-model="value" @change="getData" placeholder="请选择">
         <el-option v-for="item in options" :key="item.code" :label="item.value" :value="item.code"></el-option>
       </el-select>
     </template>
@@ -17,12 +17,17 @@
           {{sheckInSumNumMap.freeSumNum.PeopleNum}}
           <svg-icon style="color:#464968;" icon="arrow1" />
         </p>
-        <p class="font-gray">{{ sheckInSumNumMap.freeSumNum.Name }}</p>
-        <p class="util-flex sheckInSumNum">
+        <p
+          v-if="sheckInSumNumMap.freeSumNum"
+          class="font-gray"
+        >{{ sheckInSumNumMap.freeSumNum.Name }}</p>
+
+        <p v-if="sheckInSumNumMap.sheckInSumNum" class="util-flex sheckInSumNum">
           <span class="name">{{sheckInSumNumMap.sheckInSumNum.Name}}</span>
           <span class="font-white">{{sheckInSumNumMap.sheckInSumNum.PeopleNum}}</span>
         </p>
-        <p class="util-flex sumBedSumNum">
+
+        <p v-if="sheckInSumNumMap.sumBedSumNum" class="util-flex sumBedSumNum">
           <span class="name">{{sheckInSumNumMap.sumBedSumNum.Name}}</span>
           <span class="font-white">{{sheckInSumNumMap.sumBedSumNum.PeopleNum}}</span>
         </p>
@@ -32,9 +37,10 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 import IndexSection from "@/components/section/index-section";
 import echartsLiquidfill from "echarts-liquidfill";
+import { getOccupancyRateByInstitutionName } from "@/api";
 console.log(echartsLiquidfill, "use echartsLiquidfill");
 
 const option = {
@@ -117,17 +123,34 @@ export default {
   },
   mounted() {
     this.init();
+    this.renderChart();
   },
   methods: {
+    ...mapMutations(["SET_LIQUID_FILL"]),
+    async getData() {
+      const data = await getOccupancyRateByInstitutionName({
+        InstitutionName: this.value,
+      });
+      this.SET_LIQUID_FILL(data);
+      data && this.renderChart();
+    },
     init() {
       try {
-        const data = this.pieDatum.enumInfo[0].EnumList;
+        const data = this.pieDatum.screeninstitution.institutionList.map(
+          (item) => ({
+            code: item.InstitutionName,
+            value: item.InstitutionName,
+          })
+        );
         this.options = data;
+      } catch (e) {}
+    },
+    renderChart() {
+      try {
         const sheckInSumNumMap = this.liquidFill.List.reduce((total, item) => {
           total[item.Code] = item;
           return total;
         }, {});
-        console.log(sheckInSumNumMap);
         this.option.series[0].data = new Array(3).fill(
           sheckInSumNumMap.sheckInSumNum.Percentage
         );

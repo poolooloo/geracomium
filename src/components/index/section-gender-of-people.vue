@@ -1,5 +1,8 @@
 <template>
-  <index-section class="component-gender-of-people" title="全县老人数及性别占比">
+  <index-section
+    class="component-gender-of-people"
+    :title="pieDatum && pieDatum.peopleNums[0] ? pieDatum.peopleNums[0].ScreenName : '全县老人数及性别占比'"
+  >
     <echart-wrapper class="flex-box">
       <echart-view
         v-if="finish"
@@ -10,24 +13,30 @@
       <div class="echart-data-info" v-if="dataMap&& dataMap.CountyPeople">
         <div class="flex-box">
           <div class="flex-left">
-            <p class="font-20">{{ dataMap.CountyPeople.PeopleNum }} <svg-icon style="color:#464968;" icon="arrow1"/>  </p>
+            <p class="font-20">
+              {{ dataMap.CountyPeople.PeopleNum }}
+              <svg-icon style="color:#464968;" icon="arrow1" />
+            </p>
             <p class="font-color-gray">全县总人数</p>
           </div>
           <div class="flex-right">
-            <p class="font-20">{{ dataMap.CountyOldPeople.PeopleNum }} <svg-icon style="color:#464968;" icon="arrow1"/> </p>
+            <p class="font-20">
+              {{ dataMap.CountyOldPeople.PeopleNum }}
+              <svg-icon style="color:#464968;" icon="arrow1" />
+            </p>
             <p class="font-color-gray">老人总数</p>
           </div>
         </div>
         <p class="gender-of man">
           <span class="color"></span>
           <span>男性占老人总数</span>
-          <span class="font-bold">{{ dataMap.CountyOldMan.Percentage }}%</span>
+          <span class="font-bold">{{ dataMap.CountyOldMan.Percentage * 100 }}%</span>
           <span>（{{ dataMap.CountyOldMan.PeopleNum }}人）</span>
         </p>
         <p class="gender-of woman">
           <span class="color"></span>
           <span>女性占老人总数</span>
-          <span class="font-bold">{{ dataMap.CountyOldWoMan.Percentage }}%</span>
+          <span class="font-bold">{{ dataMap.CountyOldWoMan.Percentage * 100 }}%</span>
           <span>（{{ dataMap.CountyOldWoMan.PeopleNum }}人）</span>
         </p>
       </div>

@@ -9,5 +9,13 @@ export default {
   [types.SET_LIQUID_FILL](state, payload) {
     state.liquidFill = payload
     console.log(state, 'SET_LIQUID_FILL')
+  },
+  [types.SET_DISEASE](state, payload) {
+    state.diseaseDatum = payload
+    console.log(state, 'SET_DISEASE')
+  },
+  [types.SET_AGE_DATA](state, payload) {
+    state.ageDatum = payload
+    console.log(state, 'SET_AGE_DATA')
   }
 }

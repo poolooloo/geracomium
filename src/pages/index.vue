@@ -32,7 +32,7 @@ import { mapMutations } from "vuex";
 import {
   getScreenBaseInfo,
   getScreenAgeDistributionByCounty,
-  getOccupancyRateByCounty,
+  getOccupancyRateByInstitutionName,
   getScreenDiseaseByInstitutionName,
 } from "@/api";
 
@@ -82,11 +82,16 @@ export default {
     this.init();
   },
   methods: {
-    ...mapMutations(["SET_PIE_DATA", "SET_LIQUID_FILL"]),
+    ...mapMutations([
+      "SET_PIE_DATA",
+      "SET_LIQUID_FILL",
+      "SET_DISEASE",
+      "SET_AGE_DATA",
+    ]),
     async init() {
       const data = await getScreenBaseInfo();
       const data2 = await getScreenAgeDistributionByCounty({ CountyName: "" });
-      const data3 = await getOccupancyRateByCounty({ CountyName: "" });
+      const data3 = await getOccupancyRateByInstitutionName({ InstitutionName: "" });
       const data4 = await getScreenDiseaseByInstitutionName({
         InstitutionName: "",
       });
@@ -99,6 +104,8 @@ export default {
         this.loaded = true;
         this.SET_PIE_DATA(data);
         this.SET_LIQUID_FILL(data3);
+        this.SET_DISEASE(data4);
+        this.SET_AGE_DATA(data2);
         env !== "prod" &&
           this.$nextTick(() => {
             // 缩放测试

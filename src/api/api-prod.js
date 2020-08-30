@@ -3,6 +3,6 @@ export default {
   login: 'login',
   getScreenBaseInfo: 'GetScreenBaseInfo',
   getScreenAgeDistributionByCounty: 'GetScreenAgeDistributionByCounty',
-  getOccupancyRateByCounty: 'GetOccupancyRateByCounty',
+  getOccupancyRateByInstitutionName: 'GetOccupancyRateByInstitutionName',
   getScreenDiseaseByInstitutionName: 'GetScreenDiseaseByInstitutionName',
 }

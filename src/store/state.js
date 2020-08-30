@@ -3,5 +3,7 @@ export default {
     token: ''
   },
   pieDatum: {},
-  liquidFill: {}
+  liquidFill: {},
+  diseaseDatum: {},
+  ageDatum: {}
 }

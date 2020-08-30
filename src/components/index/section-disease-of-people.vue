@@ -1,30 +1,36 @@
 <template>
-  <index-section class="component-disease-of-people" title="机构内老人病史分布">
+  <index-section
+    class="component-disease-of-people"
+    :title="diseaseDatum.ScreenName || '机构内老人病史分布'"
+  >
     <template #section-select>
-      <el-select v-model="value" placeholder="请选择">
-        <el-option
-          v-for="item in options"
-          :key="item.code"
-          :label="item.value"
-          :value="item.code"
-        ></el-option>
+      <el-select v-model="value" @change="getData" placeholder="请选择">
+        <el-option v-for="item in options" :key="item.code" :label="item.value" :value="item.code"></el-option>
       </el-select>
     </template>
     <echart-wrapper class="util-flex" style="height: inherit;">
       <echart-view
+        v-if="finish"
         class="component-number-of-people-chart"
         canvas-name="number-of-people"
         :canvas-options="option"
         ref="echart"
       />
+      <ul class="echart-info">
+        <li v-for="(item,i) in diseaseDatumList" :key="i">
+          <span style="color:#D0ECFF; margin-right: 5px;">{{item.name}}</span>
+          <span>{{item.percentage}}</span>
+        </li>
+      </ul>
     </echart-wrapper>
   </index-section>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 import IndexSection from "@/components/section/index-section";
 import { grid } from "@/echarts/echart-options";
+import { getScreenDiseaseByInstitutionName } from "@/api";
 
 const option = {
   grid,
@@ -45,13 +51,7 @@ const option = {
       type: "pie",
       radius: "60%",
       center: ["50%", "50%"],
-      data: [
-        { value: 335, name: "直接访问" },
-        { value: 310, name: "邮件营销" },
-        { value: 274, name: "联盟广告" },
-        { value: 235, name: "视频广告" },
-        { value: 400, name: "搜索引擎" },
-      ].sort(function (a, b) {
+      data: [].sort(function (a, b) {
         return a.value - b.value;
       }),
       roseType: "radius",
@@ -82,45 +82,56 @@ export default {
     IndexSection,
   },
   computed: {
-    ...mapState(["pieDatum"]),
+    ...mapState(["pieDatum", "diseaseDatum"]),
   },
   data() {
     return {
-      options: [
-        {
-          value: "选项1",
-          label: "黄金糕",
-        },
-        {
-          value: "选项2",
-          label: "双皮奶",
-        },
-        {
-          value: "选项3",
-          label: "蚵仔煎",
-        },
-        {
-          value: "选项4",
-          label: "龙须面",
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭",
-        },
-      ],
+      options: [],
+      finish: false,
       value: "",
       option,
+      diseaseDatumList: [],
     };
   },
   mounted() {
     this.init();
+    this.renderChart();
   },
   methods: {
+    ...mapMutations(["SET_DISEASE"]),
+    async getData() {
+      this.finish = false;
+      const data = await getScreenDiseaseByInstitutionName({
+        InstitutionName: this.value,
+      });
+
+      this.SET_DISEASE(data);
+      data && this.renderChart();
+    },
     init() {
       try {
-        const data = this.pieDatum.enumInfo[0].EnumList;
-        this.options = data
-
+        const data = this.pieDatum.screeninstitution.institutionList.map(
+          (item) => ({
+            code: item.InstitutionName,
+            value: item.InstitutionName,
+          })
+        );
+        this.options = data;
+      } catch (e) {}
+    },
+    renderChart() {
+      try {
+        this.option.series[0].data = this.diseaseDatumList =
+          this.diseaseDatum.List &&
+          this.diseaseDatum.List.map((item) => {
+            return {
+              name: item.Name,
+              value: item.PeopleNum,
+              percentage: (item.Percentage * 100).toFixed(0) + "%",
+            };
+          });
+        this.diseaseDatumList.sort((a, b) => a.value - b.value);
+        this.finish = true;
       } catch (e) {}
     },
   },
@@ -128,4 +139,27 @@ export default {
 </script>
 
 <style lang="scss">
+.component-disease-of-people {
+  .component-echart-wrapper {
+    align-items: center;
+    justify-content: space-between;
+  }
+  .echart-info {
+    width: 200px;
+    height: 150px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+    li {
+      width: 90px;
+      font-size: 12px;
+      span {
+        line-height: 30px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+  }
+}
 </style>

@@ -1,5 +1,8 @@
 <template>
-  <index-section class="component-important-of-people" title="全县五保老人统计">
+  <index-section
+    class="component-important-of-people"
+    :title="pieDatum && pieDatum.peopleNums[1] ? pieDatum.peopleNums[1].ScreenName : '全县五保老人统计'"
+  >
     <echart-wrapper class="flex-box">
       <div class="echarts flex-box">
         <div class="util-flex">
@@ -153,22 +156,18 @@ export default {
     init() {
       try {
         const data = this.pieDatum.peopleNums[1].List;
-        const allPeople = this.pieDatum.peopleNums[0].List.find(
-          (item) => item.Code === "CountyPeople"
-        );
-
         data.forEach((item) => {
           this.dataMap[item.Code] = item;
         });
         this.echartsData1.legendData = [
-          allPeople.Name,
+          this.dataMap.CountyMeiWuBao.Name,
           this.dataMap.CountyWuBao.Name,
         ];
         this.echartsData1.seriesData = [
           {
-            name: allPeople.Name,
-            value: allPeople.PeopleNum,
-            // percentage: allPeople.Percentage * 100,
+            name: this.dataMap.CountyMeiWuBao.Name,
+            value: this.dataMap.CountyMeiWuBao.PeopleNum,
+            // percentage: this.dataMap.CountyWuBao.Percentage * 100,
           },
           {
             name: this.dataMap.CountyWuBao.Name,
@@ -177,13 +176,13 @@ export default {
           },
         ];
         this.echartsData2.legendData = [
-          this.dataMap.CountyWuBao.Name,
+          this.dataMap.CountyWuBaoMeiShiNeng.Name,
           this.dataMap.CountyWuBaoShiNeng.Name,
         ];
         this.echartsData2.seriesData = [
           {
-            name: this.dataMap.CountyWuBao.Name,
-            value: this.dataMap.CountyWuBao.PeopleNum,
+            name: this.dataMap.CountyWuBaoMeiShiNeng.Name,
+            value: this.dataMap.CountyWuBaoMeiShiNeng.PeopleNum,
             // percentage: this.dataMap.CountyWuBao.Percentage * 100,
           },
           {

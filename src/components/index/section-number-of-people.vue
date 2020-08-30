@@ -1,5 +1,8 @@
 <template>
-  <index-section class="component-number-of-people" title="养老人数分布">
+  <index-section
+    class="component-number-of-people"
+    :title="pieDatum && pieDatum.screeninstitution.institutionPeople ? pieDatum.screeninstitution.institutionPeople.EnumName : '养老人数分布'"
+  >
     <echart-wrapper class="flex-box">
       <echart-view
         v-if="finish"

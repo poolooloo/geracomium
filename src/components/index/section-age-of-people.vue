@@ -1,27 +1,27 @@
 <template>
-  <index-section class="component-age-of-people" title="全县老人年龄分布">
+  <index-section class="component-age-of-people" :title="ageDatum.ScreenName || '全县老人年龄分布'">
     <template #section-select>
-      <el-select v-model="value" placeholder="请选择">
-        <el-option
-          v-for="item in options"
-          :key="item.code"
-          :label="item.value"
-          :value="item.code"
-        ></el-option>
+      <el-select v-model="value" @change="getData" placeholder="请选择">
+        <el-option v-for="item in options" :key="item.code" :label="item.value" :value="item.code"></el-option>
       </el-select>
     </template>
     <!-- ECHARTS -->
     <echart-wrapper class="util-flex">
-      <echart-view
-        canvas-name="gender-of-people"
-        :canvas-options="option"
-      />
+      <echart-view v-if="finish" canvas-name="gender-of-people" :canvas-options="option" />
+      <ul class="echart-info">
+        <li v-for="(item, i) in ageDatumList" :key="i">
+          <span class="name">{{ item.name }}</span>
+          <span class="percentage">{{ item.percentage }}</span>
+          <span class="value">({{ item.value }})</span>
+        </li>
+      </ul>
     </echart-wrapper>
   </index-section>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { getScreenAgeDistributionByCounty } from "@/api";
+import { mapState, mapMutations } from "vuex";
 import IndexSection from "@/components/section/index-section";
 
 const option = {
@@ -37,11 +37,10 @@ const option = {
     },
   },
   legend: {
-    data: ["展现", "点击", "访问", "咨询", "订单"],
+    data: [],
   },
   series: [
     {
-      name: "漏斗图",
       type: "funnel",
       left: 0,
       top: 0,
@@ -73,13 +72,7 @@ const option = {
           fontSize: 20,
         },
       },
-      data: [
-        { value: 45, name: "访问" },
-        { value: 25, name: "咨询" },
-        { value: 15, name: "订单" },
-        { value: 12, name: "点击" },
-        { value: 3, name: "展现" },
-      ],
+      data: [],
     },
   ],
 };
@@ -93,20 +86,48 @@ export default {
       option,
       options: [],
       value: "",
+      finish: false,
+      ageDatumList: [],
     };
   },
   computed: {
-    ...mapState(["pieDatum"]),
+    ...mapState(["pieDatum", "ageDatum"]),
   },
   mounted() {
     this.init();
+    this.renderChart();
   },
   methods: {
+    ...mapMutations([
+      'SET_AGE_DATA'
+    ]),
+    async getData() {
+      this.finish = false;
+      const data = await getScreenAgeDistributionByCounty({
+        CountyName: this.value,
+      });
+      data && this.SET_AGE_DATA(data);
+      this.renderChart();
+    },
     init() {
       try {
         const data = this.pieDatum.enumInfo[0].EnumList;
-        this.options = data
-
+        this.options = data;
+      } catch (e) {}
+    },
+    renderChart() {
+      try {
+        this.option.legend.data = this.ageDatum.List.map((item) => item.Name);
+        this.option.series[0].data = this.ageDatumList = this.ageDatum.List.map(
+          (item) => {
+            return {
+              name: item.Name,
+              value: item.PeopleNum,
+              percentage: (item.Percentage * 100).toFixed(0) + "%",
+            };
+          }
+        ).sort((a, b) => a.value - b.value);
+        this.finish = true;
       } catch (e) {}
     },
   },
@@ -118,6 +139,32 @@ export default {
   .component-age-echarts__wrapper {
     min-height: 170px;
     height: px2vh(170);
+  }
+  .echart-info {
+    width: 150px;
+    margin-left: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    span {
+      font-size: 12px;
+    }
+    li {
+      display: flex;
+      margin-bottom: 16px;
+    }
+  }
+  .name {
+    color: #d0ecff;
+    width: 60px;
+    margin-right: 16px;
+  }
+  .percentage {
+    color: #fff;
+    margin-right: 6px;
+  }
+  .value {
+    color: #abacc0;
   }
 }
 </style>

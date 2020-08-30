@@ -48,7 +48,6 @@ export default {
     align-items: center;
   }
   .gov-list {
-    flex: 1;
     margin-top: 12px;
     overflow: auto;
   }

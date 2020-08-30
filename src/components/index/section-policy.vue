@@ -1,5 +1,8 @@
 <template>
-  <index-section class="component-policy" title="当地养老政策列表">
+  <index-section
+    class="component-policy"
+    :title="pieDatum && pieDatum.screenNews ? pieDatum.screenNews.ScreenName : '当地养老政策列表'"
+  >
     <div class="policy-wrapper">
       <div
         class="policy-item"

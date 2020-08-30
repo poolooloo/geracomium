@@ -10,14 +10,15 @@
 <script>
 // 自定义主题 json
 // import customMapConfig from "@/baidu-map/custom-map-config.json";
+import { mapState } from "vuex";
 import mapAside from "./map-aside";
 import mapIconBar from "./map-icon-bar";
 import mapInfo from "./map-info";
 
 const position = [
   {
-    x: 121.47,
-    y: 31.23,
+    x: 118.956324,
+    y: 40.413546,
   },
 ];
 
@@ -27,6 +28,9 @@ export default {
     mapAside,
     mapIconBar,
     mapInfo,
+  },
+  computed: {
+    ...mapState(["pieDatum"]),
   },
   mounted() {
     this.init();
@@ -70,6 +74,10 @@ export default {
       map.setMapStyle({ style: "dark" });
       // 自定义主题
       // map.setMapStyle({ styleJson: customMapConfig });
+
+      // 定位
+      const govList = this.pieDatum.screeninstitution.institutionList;
+      console.log(govList)
 
       // 隐藏 BAIDU LOGO
       setTimeout(() => {

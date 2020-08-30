@@ -1,10 +1,13 @@
 <template>
-  <index-section class="component-area-of-people" title="全县老人区域分布">
+  <index-section
+    class="component-area-of-people"
+    :title="pieDatum && pieDatum.streetsInfos ? pieDatum.streetsInfos.ScreenName : '全县老人区域分布'"
+  >
     <!-- ECHARTS -->
     <echart-wrapper>
       <echart-view
         width="450"
-        height="560"
+        height="380"
         v-if="finish"
         canvas-name="gender-of-people"
         :canvas-options="option"
