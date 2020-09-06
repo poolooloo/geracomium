@@ -9,14 +9,25 @@
       <div class="component-layout-widget__bottom"></div>
     </div>
     <div class="component-layout-wrapper__widgets">
-      <div class="component-layout__widgets-time" v-if="dateTime.timer">
+      <div class="component-layout__widgets-time">
         <div class="util-flex">
-          <div class="icon">
-            <svg-icon icon="time"></svg-icon>
+          <div class="util-flex" v-if="dateTime.timer">
+            <div class="icon">
+              <svg-icon icon="time"></svg-icon>
+            </div>
+            <div class="content">
+              <p class="timer">{{ dateTime.timer }}</p>
+              <p class="date">{{ dateTime.date }}</p>
+            </div>
           </div>
-          <div class="content">
-            <p class="timer">{{ dateTime.timer }}</p>
-            <p class="date">{{ dateTime.date }}</p>
+          <div class="util-flex" style="margin-left:30px;" v-if="weather.wea">
+            <div class="icon">
+              <svg-icon :icon="weather.icon"></svg-icon>
+            </div>
+            <div class="content">
+              <p class="timer">{{ weather.wea }}</p>
+              <p class="date">{{ weather.tem }}℃</p>
+            </div>
           </div>
         </div>
       </div>
@@ -29,18 +40,54 @@
 </template>
 
 <script>
+import { getTianQiApi } from "@/api/index";
+
+const iconMap = {
+  snow: ["xue"],
+  yu: ["yu"],
+  weather: ["wu", "yun", "yin"],
+  flash: ["lei", "bingbao"],
+  sun: ["qing"],
+};
+
 export default {
   data() {
     return {
       dateTime: {},
+      weather: {
+        tem: "",
+        wea: "",
+        icon: "",
+      },
     };
   },
   mounted() {
+    this.getTianQiApi();
     setInterval(() => {
       this.formateTime();
     }, 1e3);
   },
   methods: {
+    getTianQiApi() {
+      let iconName = "weather";
+      getTianQiApi({
+        appid: "12388368",
+        appsecret: "JB2Q7sB3",
+        version: "v61",
+        vue: "1",
+        cityid: "101091102",
+      }).then((res) => {
+        this.weather.tem = res.tem;
+        this.weather.wea = res.wea;
+        Object.keys(iconMap).some((icon) => {
+          if (iconMap[icon].includes(res.wea_img)) {
+            iconName = icon;
+            return true;
+          }
+        });
+        this.weather.icon = iconName;
+      });
+    },
     formateTime() {
       const date = new Date();
       const year = date.getFullYear();
@@ -229,7 +276,7 @@ export default {
   .component-layout__widgets-time {
     position: absolute;
     top: px2vh(45);
-    right: px2vw(170);
+    right: px2vw(84);
     .util-flex {
       align-items: center;
     }

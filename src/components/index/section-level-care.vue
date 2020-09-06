@@ -1,6 +1,8 @@
 <template>
-  <index-section class="component-level-care"
-    :title="pieDatum && pieDatum.peopleNums[2] ? pieDatum.peopleNums[2].ScreenName : '分级照护'">
+  <index-section
+    class="component-level-care"
+    :title="pieDatum && pieDatum.peopleNums[2] ? pieDatum.peopleNums[2].ScreenName : '分级照护'"
+  >
     <echart-wrapper class="flex-box">
       <echart-view
         v-if="finish"
@@ -32,6 +34,7 @@ import { mapState } from "vuex";
 import IndexSection from "@/components/section/index-section";
 
 const option = {
+  color: ["#54c6e7", "#da7804", "#2988E4"],
   legend: {
     orient: "vertical",
     left: 10,

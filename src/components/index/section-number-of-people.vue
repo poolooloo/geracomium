@@ -28,6 +28,7 @@ import { mapState } from "vuex";
 import IndexSection from "@/components/section/index-section";
 
 const option = {
+  color: ["#54c6e7", "#2988E4", "#da7804"],
   legend: {
     orient: "vertical",
     left: 10,
