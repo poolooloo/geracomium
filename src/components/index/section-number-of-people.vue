@@ -130,7 +130,7 @@ export default {
     justify-content: space-between;
     &:first-child {
       .color {
-        background-color: $orange;
+        background-color: $blue-level2;
       }
     }
     &:nth-child(2) {
@@ -140,7 +140,7 @@ export default {
     }
     &:last-child {
       .color {
-        background-color: $blue-level2;
+        background-color: $orange;
       }
     }
   }

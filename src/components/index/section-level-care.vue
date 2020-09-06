@@ -162,17 +162,17 @@ export default {
     // justify-content: space-between;
     margin-bottom: 19px;
     .color {
-      background-color: $blue-level1;
+      background-color: $orange;
     }
     &:nth-child(2) {
       .color {
-        background-color: $orange;
+        background-color: $blue-level2;
       }
     }
     &:last-child {
       margin-bottom: 0;
       .color {
-        background-color: $blue-level2;
+        background-color: $blue-level1;
       }
     }
   }
