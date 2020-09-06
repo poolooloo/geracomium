@@ -2,9 +2,11 @@
   <div class="map-aside">
     <p class="flex-box">
       <span class="title">机构列表({{ count }})</span>
-      <svg-icon icon="triangle"></svg-icon>
+      <i class="toggle-icon" :class="{'toggle-bottom': top}" @click="toggle">
+        <svg-icon icon="triangle"></svg-icon>
+      </i>
     </p>
-    <ul class="gov-list">
+    <ul class="gov-list" :class="{'toggle-height': !top}">
       <li class="gov-item" v-for="(item, i) in govList" :key="i" @click="showInfo(item)">
         <svg-icon icon="gov"></svg-icon>
         <span class="gov-item-name">{{ item.InstitutionName }}</span>
@@ -20,6 +22,7 @@ export default {
     return {
       count: 0,
       govList: [],
+      top: true,
     };
   },
   computed: {
@@ -35,6 +38,9 @@ export default {
   methods: {
     showInfo(item) {
       this.$EventBus.$emit("SHOW_MARKER_INFO", item);
+    },
+    toggle() {
+      this.top = !this.top;
     },
   },
 };
@@ -55,6 +61,13 @@ export default {
   .gov-list {
     margin-top: 12px;
     overflow: auto;
+    height: auto;
+    transition: all 0.3s;
+  }
+  .toggle-height {
+    height: 0;
+    margin-top: 0;
+    transition: all 0.3s;
   }
   .gov-item {
     display: flex;
@@ -74,6 +87,13 @@ export default {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+  }
+  .toggle-icon {
+    transition: all 0.5s;
+  }
+  .toggle-bottom {
+    transition: all 0.5s;
+    transform: rotateZ(180deg);
   }
 }
 </style>

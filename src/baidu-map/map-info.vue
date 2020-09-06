@@ -12,7 +12,15 @@
         <span style="color: #2FC2FF;">{{infoData.Nature}}</span>
       </p>
       <div class="image-wrapper">
-        <img :src="infoData.PhotoUrl[0]" alt />
+        <swiper
+          style="height: 100%;"
+          v-if="infoData.PhotoUrl && infoData.PhotoUrl.length"
+          :options="swiperOption"
+        >
+          <swiper-slide v-for="(url, i) in infoData.PhotoUrl" :key="i">
+            <img :src="url" alt />
+          </swiper-slide>
+        </swiper>
       </div>
       <ul class="price util-flex">
         <li>
@@ -47,11 +55,19 @@ export default {
   data() {
     return {
       infoData: {},
+      swiperOption: {},
     };
   },
   mounted() {
     this.$EventBus.$on("SHOW_MARKER_INFO", (item) => {
-      item.PhotoUrl = JSON.parse(item.PhotoUrl);
+      if (item.PhotoUrl && !Array.isArray(item.PhotoUrl)) {
+        try {
+          item.PhotoUrl = JSON.parse(item.PhotoUrl);
+        } catch (e) {
+          item.PhotoUrl = [];
+          console.error(item.PhotoUrl);
+        }
+      }
       this.infoData = item;
       this.renderInfoDialog();
     });
@@ -96,6 +112,7 @@ export default {
   }
   .image-wrapper {
     height: 140px;
+    overflow: hidden;
     img {
       width: 100%;
       height: 100%;
@@ -130,8 +147,8 @@ export default {
     font-size: 12px;
     color: #fff;
     line-height: 20px;
-    .icon{
-      color: #718EB9;
+    .icon {
+      color: #718eb9;
       margin-right: 8px;
     }
   }

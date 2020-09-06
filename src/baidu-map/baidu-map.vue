@@ -9,7 +9,7 @@
 
 <script>
 // 自定义主题 json
-import customMapConfig from "@/baidu-map/custom-map-config.json";
+// import customMapConfig from "@/baidu-map/custom-map-config.json";
 import { mapState } from "vuex";
 import mapAside from "./map-aside";
 import mapIconBar from "./map-icon-bar";
@@ -34,6 +34,9 @@ export default {
   },
   mounted() {
     this.init();
+    this.$EventBus.$on("SHOW_MARKER_INFO", (item) => {
+      this.centerMap(item);
+    });
   },
   data() {
     return {
@@ -56,7 +59,7 @@ export default {
     },
     renderIndexMap() {
       const zoom = this.map.getZoom();
-      this.renderEmptyMap(zoom < 10 ? 11 : zoom);
+      this.renderEmptyMap(zoom < 10 ? 15 : zoom);
     },
     renderEmptyMap(zoom) {
       if (!this.map) {
@@ -70,7 +73,10 @@ export default {
       map.centerAndZoom(new BaiduMap.Point(XCoordinate, YCoordinate), zoom);
       // map.setMapStyle({ style: "dark" });
       // 自定义主题
-      map.setMapStyle({ styleJson: customMapConfig });
+      // map.setMapStyle({ styleJson: customMapConfig });
+      map.setMapStyleV2({
+        styleId: "b67216402d439fdbb4f8110ed73bf567",
+      });
 
       // 定位
       const govList = this.pieDatum.screeninstitution.institutionList;
@@ -125,11 +131,64 @@ export default {
         ),
       }); // 创建标注
       map.addOverlay(marker);
+      const label = new BaiduMap.Label(item.InstitutionName, {
+        offset: new BaiduMap.Size(20, -10),
+      });
+
+      label.setStyle({
+        fontSize: "12px", //字号
+        color: "#da7804",
+        width: "60px",
+        "text-overflow": "ellipsis",
+        "white-space": "nowrap",
+        overflow: "hidden",
+        cursor: "pointer",
+        border: "0 none",
+        background: "transparent",
+      });
+
+      marker.setLabel(label);
 
       // 先画图标再设置图标动画
       marker.addEventListener("click", () => {
-        this.$EventBus.$emit('SHOW_MARKER_INFO', item)
+        this.$EventBus.$emit("SHOW_MARKER_INFO", item);
       });
+    },
+
+    centerMap(item) {
+      const { XCoordinate, YCoordinate } = item;
+      const BaiduMap = this.BaiduMap;
+      const map = this.map;
+
+      const allOverlay = map.getOverlays();
+      allOverlay.some((item) => {
+        if (item.getLabel) {
+          const dot = item.getLabel();
+          if (dot && dot.content === "danceDot") {
+            map.removeOverlay(item);
+            true;
+          }
+        }
+      });
+
+      const poniter = new BaiduMap.Point(XCoordinate, YCoordinate);
+      map.centerAndZoom(poniter, 15);
+      const marker = new BaiduMap.Marker(poniter); // 创建标注
+
+      const label = new BaiduMap.Label("danceDot", {
+        offset: new BaiduMap.Size(20, -10),
+      });
+
+      label.setStyle({
+        fontSize: "12px", //字号
+        color: "transparent",
+        border: "0 none",
+        background: "transparent",
+      });
+
+      marker.setLabel(label);
+      map.addOverlay(marker);
+      marker.setAnimation(2);
     },
   },
 };

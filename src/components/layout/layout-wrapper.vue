@@ -9,6 +9,17 @@
       <div class="component-layout-widget__bottom"></div>
     </div>
     <div class="component-layout-wrapper__widgets">
+      <div class="component-layout__widgets-time" v-if="dateTime.timer">
+        <div class="util-flex">
+          <div class="icon">
+            <svg-icon icon="time"></svg-icon>
+          </div>
+          <div class="content">
+            <p class="timer">{{ dateTime.timer }}</p>
+            <p class="date">{{ dateTime.date }}</p>
+          </div>
+        </div>
+      </div>
       <div class="component-layout-widget__square right"></div>
       <div class="component-layout-widget__square top"></div>
       <div class="component-layout-widget__square left"></div>
@@ -16,6 +27,53 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      dateTime: {},
+    };
+  },
+  mounted() {
+    setInterval(() => {
+      this.formateTime();
+    }, 1e3);
+  },
+  methods: {
+    formateTime() {
+      const date = new Date();
+      const year = date.getFullYear();
+      let month = date.getMonth() + 1;
+      let strDate = date.getDate();
+      let hours = date.getHours();
+      let min = date.getMinutes();
+      let second = date.getSeconds();
+
+      if (month >= 1 && month <= 9) {
+        month = "0" + month;
+      }
+      if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+      }
+      if (hours >= 0 && hours <= 9) {
+        hours = "0" + hours;
+      }
+      if (min >= 0 && min <= 9) {
+        min = "0" + min;
+      }
+      if (second >= 0 && second <= 9) {
+        second = "0" + second;
+      }
+
+      this.dateTime = {
+        date: `${year}年${month}月${strDate}日`,
+        timer: `${hours}:${min}:${second}`,
+      };
+    },
+  },
+};
+</script>
 
 <style lang="scss">
 .component-layout-wrapper {
@@ -130,7 +188,7 @@
       width: 198px;
       height: 10px;
       background-color: #00052b;
-      background-image: url('../../assets/images/index-widget-title-right.png');
+      background-image: url("../../assets/images/index-widget-title-right.png");
       background-size: cover;
     }
     &::before {
@@ -140,32 +198,57 @@
       left: -340px;
       width: 217px;
       height: 19px;
-      background-image: url('../../assets/images/index-widget-title-left.png');
+      background-image: url("../../assets/images/index-widget-title-left.png");
       background-size: cover;
     }
   }
-  .component-layout-widget__between{
-    &::before{
-      content: '';
+  .component-layout-widget__between {
+    &::before {
+      content: "";
       position: absolute;
       width: 8px;
       height: 239px;
       left: -4px;
       top: 254px;
       background-color: #00052b;
-      background-image: url('../../assets/images/index-widget-border-left.png');
+      background-image: url("../../assets/images/index-widget-border-left.png");
       background-size: cover;
     }
-    &::after{
-      content: '';
+    &::after {
+      content: "";
       position: absolute;
       width: 18px;
       height: 165px;
       right: -1px;
       bottom: 254px;
       background-color: #00052b;
-      background-image: url('../../assets/images/index-widget-border-right.png');
+      background-image: url("../../assets/images/index-widget-border-right.png");
       background-size: cover;
+    }
+  }
+  .component-layout__widgets-time {
+    position: absolute;
+    top: px2vh(45);
+    right: px2vw(170);
+    .util-flex {
+      align-items: center;
+    }
+    .icon {
+      font-size: 24px;
+      color: #8bbed5;
+    }
+    .content {
+      margin-left: 10px;
+    }
+    .timer {
+      font-size: 14px;
+      color: #d0ecff;
+      line-height: 16px;
+    }
+    .date {
+      font-size: 12px;
+      color: #80839c;
+      line-height: 16px;
     }
   }
 }

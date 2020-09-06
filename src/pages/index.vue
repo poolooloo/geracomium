@@ -95,11 +95,6 @@ export default {
       const data4 = await getScreenDiseaseByInstitutionName({
         InstitutionName: "",
       });
-      console.log({
-        data2,
-        data3,
-        data4,
-      });
       if (data.Success) {
         this.loaded = true;
         this.SET_PIE_DATA(data);
