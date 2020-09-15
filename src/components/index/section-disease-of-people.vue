@@ -5,7 +5,12 @@
   >
     <template #section-select>
       <el-select v-model="value" @change="getData" placeholder="请选择">
-        <el-option v-for="item in options" :key="item.code" :label="item.value" :value="item.code"></el-option>
+        <el-option
+          v-for="(item, index) in options"
+          :key="index"
+          :label="item.value"
+          :value="item.code"
+        ></el-option>
       </el-select>
     </template>
     <echart-wrapper class="util-flex" style="height: inherit;">
@@ -71,9 +76,6 @@ const option = {
       },
       animationType: "scale",
       animationEasing: "elasticOut",
-      animationDelay: function () {
-        return Math.random() * 200;
-      },
     },
   ],
 };
@@ -88,7 +90,7 @@ export default {
     return {
       options: [],
       finish: false,
-      value: "",
+      value: "全县",
       option,
       diseaseDatumList: [],
     };
@@ -116,6 +118,10 @@ export default {
             value: item.InstitutionName,
           })
         );
+        data.unshift({
+          code: "全县",
+          value: "全县",
+        });
         this.options = data;
       } catch (e) {}
     },

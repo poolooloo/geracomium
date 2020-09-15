@@ -158,7 +158,7 @@ export default {
     font-size: 12px;
     line-height: 16px;
     color: #abacc0;
-    overflow: hidden;
+    overflow: auto;
   }
 }
 </style>

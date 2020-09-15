@@ -39,6 +39,12 @@
           <span class="font-bold">{{ dataMap.CountyOldWoMan.Percentage * 100 }}%</span>
           <span>（{{ dataMap.CountyOldWoMan.PeopleNum }}人）</span>
         </p>
+        <p class="gender-of oldman">
+          <span class="color"></span>
+          <span>老年人占比</span>
+          <span class="font-bold">{{ dataMap.CountyOldPeople.Percentage * 100 }}%</span>
+          <span>（{{ dataMap.CountyOldPeople.PeopleNum }}人）</span>
+        </p>
       </div>
     </echart-wrapper>
   </index-section>
@@ -180,11 +186,12 @@ export default {
     color: #abacc0;
   }
   .gender-of {
+    margin-top: 16px;
     display: flex;
     align-items: center;
     color: #d0ecff;
     &.man {
-      margin: 28px 0 17px;
+      margin-top: 24px;
       .color {
         background: #da7804;
       }
@@ -192,6 +199,12 @@ export default {
     &.woman {
       .color {
         background: #54c6e7;
+      }
+    }
+    &.oldman {
+      .color {
+        border-left: 5px solid #da7804;
+        border-right: 5px solid #54c6e7;
       }
     }
     .color {

@@ -2,16 +2,24 @@
   <index-section class="component-check-in" :title="liquidFill.ScreenName || '机构入住率'">
     <template #section-select>
       <el-select v-model="value" @change="getData" placeholder="请选择">
-        <el-option v-for="item in options" :key="item.code" :label="item.value" :value="item.code"></el-option>
+        <el-option
+          v-for="(item, index) in options"
+          :key="index"
+          :label="item.value"
+          :value="item.code"
+        ></el-option>
       </el-select>
     </template>
     <echart-wrapper class="util-flex">
-      <echart-view
-        v-if="finish"
-        class="component-check-in-chart"
-        canvas-name="check-in"
-        :canvas-options="option"
-      />
+      <div class="tmp-box" style="min-width: 205px;">
+        <echart-view
+          style="height: 100%;"
+          v-if="finish"
+          class="component-check-in-chart"
+          canvas-name="check-in"
+          :canvas-options="option"
+        />
+      </div>
       <div class="echart-info">
         <p v-if="sheckInSumNumMap.freeSumNum" class="freeSumNum">
           {{sheckInSumNumMap.freeSumNum.PeopleNum}}
@@ -60,11 +68,11 @@ const option = {
       },
       label: {
         formatter: function (param) {
-          return param.value * 100 + "%" + "\n\n" + "入住率";
+          return (param.value * 100).toFixed(2) + "%" + "\n\n" + "入住率";
         },
         fontSize: 16,
         fontWeight: 400,
-        color: 'rgb(47, 194, 255)',
+        color: "rgb(47, 194, 255)",
       },
       backgroundStyle: {
         color: "rgba(0,0,0,0)", //图表的背景颜色
@@ -118,7 +126,7 @@ export default {
       options: [],
       finish: false,
       option,
-      value: "",
+      value: "全县",
       sheckInSumNumMap: {},
     };
   },
@@ -129,6 +137,7 @@ export default {
   methods: {
     ...mapMutations(["SET_LIQUID_FILL"]),
     async getData() {
+      this.finish = false;
       const data = await getOccupancyRateByInstitutionName({
         InstitutionName: this.value,
       });
@@ -143,6 +152,10 @@ export default {
             value: item.InstitutionName,
           })
         );
+        data.unshift({
+          code: "全县",
+          value: "全县",
+        });
         this.options = data;
       } catch (e) {}
     },

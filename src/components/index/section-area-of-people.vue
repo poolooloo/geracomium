@@ -7,7 +7,7 @@
     <echart-wrapper>
       <echart-view
         width="450"
-        height="380"
+        :height="echartsHeight"
         v-if="finish"
         canvas-name="gender-of-people"
         :canvas-options="option"
@@ -102,6 +102,7 @@ export default {
     return {
       option,
       finish: false,
+      echartsHeight: '380',
       echartsData: {
         legendData: [],
         seriesData: [],
@@ -114,9 +115,13 @@ export default {
   methods: {
     init() {
       try {
-        const data = this.pieDatum.streetsInfos.List.sort(
-          (a, b) => a.SumPeople - b.SumPeople
+        let data = this.pieDatum.streetsInfos.List.sort(
+          (a, b) => a.SortNum - b.SortNum
         );
+        // data = data.slice(0,10)
+        if(data && data.length > 10){
+          this.echartsHeight = '800'
+        }
         const __data = data.map((item) => item.SumPeople);
         const max = Math.max(...__data);
         this.option.yAxis[0].data = data.map((item) => item.StreetsName);

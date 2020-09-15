@@ -4,7 +4,7 @@ import env from '@/api/api-env'
 const host = {
   mock: 'http://mp-ut.yanglaola.cn',
   dev: 'http://mp-ut.yanglaola.cn',
-  prod: 'http://mp-ut.yanglaola.cn'
+  prod: '/'
 }
 
 export default host[env]

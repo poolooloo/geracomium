@@ -210,9 +210,9 @@ export default {
   }
 
   .map-info {
-    top: 50%;
-    left: 40%;
-    transform: translate(-50%, -50%);
+    top: 10%;
+    left: 10%;
+    // transform: translate(-50%, -50%);
   }
 
   .map-icon-bar {

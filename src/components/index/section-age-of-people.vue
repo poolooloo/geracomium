@@ -2,7 +2,12 @@
   <index-section class="component-age-of-people" :title="ageDatum.ScreenName || '全县老人年龄分布'">
     <template #section-select>
       <el-select v-model="value" @change="getData" placeholder="请选择">
-        <el-option v-for="item in options" :key="item.code" :label="item.value" :value="item.code"></el-option>
+        <el-option
+          v-for="(item, index) in options"
+          :key="index"
+          :label="item.value"
+          :value="item.code"
+        ></el-option>
       </el-select>
     </template>
     <!-- ECHARTS -->
@@ -86,7 +91,7 @@ export default {
     return {
       option,
       options: [],
-      value: "",
+      value: "全县",
       finish: false,
       ageDatumList: [],
     };
@@ -124,8 +129,8 @@ export default {
             percentage: (item.Percentage * 100).toFixed(0) + "%",
           };
         });
-        this.ageDatumList = __data.concat()
-        this.option.series[0].data =  __data;
+        this.ageDatumList = __data.concat();
+        this.option.series[0].data = __data;
         this.finish = true;
       } catch (e) {}
     },
