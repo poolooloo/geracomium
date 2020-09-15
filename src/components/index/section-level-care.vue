@@ -14,7 +14,7 @@
       <div class="echart-data-info" v-if="finish">
         <div class="content">
           <p>
-            <span class="title">养老服务从业人员数</span>
+            <span class="second-title">养老服务从业人员数</span>
             <span class="count">{{ count }}</span>
           </p>
           <div class="flex-box item" v-for="(item, index) in sourceData" :key="index">
@@ -140,7 +140,10 @@ export default {
     font-size: 12px;
     margin-right: 5px;
   }
-  .title,
+  .second-title {
+    margin-right: 20px;
+  }
+  .second-title,
   .item-count {
     color: #ababbf;
   }
