@@ -69,7 +69,7 @@ const option = {
         },
       },
       itemStyle: {
-        borderColor: "#fff",
+        borderColor: "rgba(0,0,0,.2)",
         borderWidth: 1,
       },
       emphasis: {
@@ -125,11 +125,16 @@ export default {
         const __data = this.ageDatum.List.map((item) => {
           return {
             name: item.Name,
+            value: item.Percentage * 200,
+          };
+        });
+        this.ageDatumList = this.ageDatum.List.map((item) => {
+          return {
+            name: item.Name,
             value: item.PeopleNum,
             percentage: (item.Percentage * 100).toFixed(0) + "%",
           };
         });
-        this.ageDatumList = __data.concat();
         this.option.series[0].data = __data;
         this.finish = true;
       } catch (e) {}

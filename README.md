@@ -10,9 +10,14 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Compiles and minifies for uat
 ```
 npm run build
+```
+
+### Compiles and minifies for production
+```
+npm run product
 ```
 
 ### Lints and fixes files
