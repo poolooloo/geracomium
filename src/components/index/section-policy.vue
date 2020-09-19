@@ -114,7 +114,7 @@ export default {
 }
 .policy-title {
   margin-bottom: 30px;
-  font-size: 16px;
+  font-size: 20px;
   color: #2fc2ff;
 }
 .replace-table {

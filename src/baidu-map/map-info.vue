@@ -51,6 +51,8 @@
   </div>
 </template>
 <script>
+import { getScreenInstitutionDtl } from "@/api";
+
 export default {
   data() {
     return {
@@ -60,21 +62,31 @@ export default {
   },
   mounted() {
     this.$EventBus.$on("SHOW_MARKER_INFO", (item) => {
-      if (item.PhotoUrl && !Array.isArray(item.PhotoUrl)) {
+      getScreenInstitutionDtl({
+        institutionId: item.Id,
+      }).then((res) => {
         try {
-          item.PhotoUrl = JSON.parse(item.PhotoUrl);
+          res.PhotoUrl = JSON.parse(res.PhotoUrl);
         } catch (e) {
-          item.PhotoUrl = [];
-          console.error(item.PhotoUrl);
+          res.PhotoUrl = [];
+          // console.error(res.PhotoUrl);
         }
-      }
-      this.infoData = item;
-      this.renderInfoDialog();
+        this.infoData = res;
+        this.renderInfoDialog();
+      });
+      // if (item.PhotoUrl && !Array.isArray(item.PhotoUrl)) {
+      //   try {
+      //     item.PhotoUrl = JSON.parse(item.PhotoUrl);
+      //   } catch (e) {
+      //     item.PhotoUrl = [];
+      //     console.error(item.PhotoUrl);
+      //   }
+      // }
     });
   },
   methods: {
     renderInfoDialog() {
-      console.log(this.infoData);
+      // console.log(this.infoData);
     },
     closeInfoData() {
       this.infoData = null;

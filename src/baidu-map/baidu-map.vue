@@ -89,7 +89,7 @@ export default {
           case "居家养老服务中心":
             pointMap["country"].push(item);
             break;
-          case "农村幸福院":
+          case "农村中心幸福院":
             pointMap["home"].push(item);
             break;
           default:

@@ -115,9 +115,7 @@ export default {
   methods: {
     init() {
       try {
-        let data = this.pieDatum.streetsInfos.List.sort(
-          (a, b) => a.SortNum - b.SortNum
-        );
+        let data = this.pieDatum.streetsInfos.List;
         // data = data.slice(0,10)
         if(data && data.length > 10){
           this.echartsHeight = '800'
