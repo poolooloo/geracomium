@@ -102,10 +102,21 @@ export default {
     init() {
       try {
         const data = this.pieDatum.peopleNums[2].List;
-        this.sourceData = data;
-        this.count = data.reduce((total, item) => total + item.PeopleNum, 0);
-        this.echartsData.legendData = data.map((item) => item.Name);
-        this.echartsData.seriesData = data.map((item) => ({
+        const __data = data.filter((v) => v.Code !== "ServiceEmployees");
+        this.sourceData = __data.map((item) => {
+          return {
+            ...item,
+            Percentage: item.Percentage.toFixed(2),
+          };
+        });
+        const serviceEmployees = data.find(
+          (v) => v.Code === "ServiceEmployees"
+        );
+        if (serviceEmployees) {
+          this.count = serviceEmployees.PeopleNum;
+        }
+        this.echartsData.legendData = __data.map((item) => item.Name);
+        this.echartsData.seriesData = __data.map((item) => ({
           name: item.Name,
           value: item.PeopleNum,
         }));
