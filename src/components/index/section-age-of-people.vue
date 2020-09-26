@@ -132,7 +132,7 @@ export default {
           return {
             name: item.Name,
             value: item.PeopleNum,
-            percentage: (item.Percentage * 100).toFixed(0) + "%",
+            percentage: (item.Percentage * 100).toFixed(2) + "%",
           };
         });
         this.option.series[0].data = __data;
@@ -150,13 +150,13 @@ export default {
     height: px2vh(170);
   }
   .echart-info {
-    width: 150px;
-    margin-left: 60px;
+    width: 170px;
+    margin-left: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     span {
-      font-size: 12px;
+      font-size: 14px;
     }
     li {
       display: flex;

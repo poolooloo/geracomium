@@ -13,7 +13,7 @@
         ></el-option>
       </el-select>
     </template>
-    <echart-wrapper class="util-flex" style="height: inherit;">
+    <echart-wrapper class="util-flex" style="height: inherit">
       <echart-view
         v-if="finish"
         class="component-number-of-people-chart"
@@ -22,9 +22,9 @@
         ref="echart"
       />
       <ul class="echart-info">
-        <li v-for="(item,i) in diseaseDatumList" :key="i">
-          <span style="color:#D0ECFF; margin-right: 5px;">{{item.name}}</span>
-          <span>{{item.percentage}}</span>
+        <li v-for="(item, i) in diseaseDatumList" :key="i">
+          <span style="color: #d0ecff; margin-right: 5px">{{ item.name }}</span>
+          <span>{{ item.percentage }}</span>
         </li>
       </ul>
     </echart-wrapper>
@@ -127,16 +127,17 @@ export default {
     },
     renderChart() {
       try {
-        this.option.series[0].data = this.diseaseDatumList =
+        this.diseaseDatumList =
           this.diseaseDatum.List &&
           this.diseaseDatum.List.map((item) => {
             return {
               name: item.Name,
               value: item.PeopleNum,
-              percentage: (item.Percentage * 100).toFixed(0) + "%",
+              percentage: (item.Percentage * 100).toFixed(2) + "%",
             };
           });
-        this.diseaseDatumList.sort((a, b) => a.value - b.value);
+        // this.diseaseDatumList.sort((a, b) => a.value - b.value);
+        this.option.series[0].data = this.diseaseDatumList.concat().slice(0, 8);
         this.finish = true;
       } catch (e) {}
     },
@@ -151,14 +152,14 @@ export default {
     justify-content: space-between;
   }
   .echart-info {
-    width: 200px;
+    width: 240px;
     height: 150px;
     display: flex;
     flex-wrap: wrap;
     overflow: auto;
     li {
-      width: 90px;
-      font-size: 12px;
+      width: 116px;
+      font-size: 14px;
       span {
         line-height: 30px;
         white-space: nowrap;

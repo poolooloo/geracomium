@@ -19,10 +19,9 @@
     </div>
 
     <el-dialog
-      title="政策详情"
       append-to-body
       :visible.sync="dialogVisible"
-      width="700px"
+      width="60%"
       :before-close="handleClose"
     >
       <template v-if="policyInfo">
@@ -92,7 +91,7 @@ export default {
     margin-bottom: 5px;
     padding-left: 10px;
     line-height: 28px;
-    font-size: 12px;
+    font-size: 14px;
     color: #d0ecff;
     background: rgba(36, 54, 102, 0.5);
     overflow: hidden;

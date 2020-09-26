@@ -148,7 +148,7 @@ export default {
   .name {
     min-width: 100px;
     color: #cfebff;
-    font-size: 12px;
+    font-size: 14px;
     margin-right: 5px;
   }
   .second-title {

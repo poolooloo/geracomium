@@ -138,5 +138,8 @@ p {
   .el-dialog__body {
     max-height: 60vh;
     overflow: auto;
+    p {
+      margin: 0;
+    }
   }
 }

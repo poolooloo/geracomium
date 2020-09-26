@@ -180,11 +180,13 @@ export default {
 .component-check-in {
   .echart-info {
     display: flex;
+    width: 150px;
+    margin-left: 50px;
     flex-direction: column;
     justify-content: center;
   }
   .name {
-    width: 65px;
+    width: 75px;
   }
   .font-white {
     color: #fff;
@@ -195,12 +197,12 @@ export default {
   }
   .font-gray {
     margin: 8px 0;
-    font-size: 12px;
+    font-size: 14px;
     color: #abacc0;
   }
   .sheckInSumNum,
   .sumBedSumNum {
-    font-size: 12px;
+    font-size: 14px;
     color: #d0ecff;
     line-height: 30px;
   }
